@@ -364,6 +364,76 @@ def create_variables(model: gp.Model, u_dict: dict[tuple, u], v_dict: dict[tuple
 #             count += 1
 #     return subjects_list
 
+def read_json_instance(instance_path):
+    
+    with open(instance_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    dias = [Dia(id, str(id)) for id in data["days"]]
+    dias.sort(key=lambda v: v.id)
+
+    turnos = [str(t) for t in data["shifts"]]
+    turnos.sort()
+
+    horarios = []
+    for h in data["times"]:
+        inicio = str(h["id"]) + "_start"
+        fin = str(h["id"]) + "_end"
+        ts = [str(tur) for tur in h["shifts"]]
+        ts_excepcional = [str(tur) for tur in h["exceptional_shifts"]]
+        horarios.append(Horario(h["id"], inicio, fin, ts, ts_excepcional))
+    horarios.sort(key=lambda v: v.id)
+
+    bloques_horario: dict[tuple, BloqueHorario] = {}
+    for dia in dias:
+        for horario in horarios:
+            bloques_horario[(dia.id, horario.id)] = BloqueHorario(dia, horario)
+
+    grupos = []
+    for g in data["groups"]:
+        grupos.append(Grupo(g["id"], g["year"], str(g["shift"]), particion=g["id"]))
+    grupos.sort(key=lambda v: v.id)
+
+    profesores = []
+    for p in data["professors"]:
+        nombre = str(p["id"])
+        min_max_dias = "min" if p["min_max_days"] == True else "max" if p["min_max_days"] == False else None
+        prof = Profesor(p["id"], nombre, min_max_dias, nombre, cursos_simultaneos = p["simult_courses"])
+        for mat in p["num_groups_per_subject"]:
+            prof.lista_materias.append({"nombre_materia" : str(mat["subject_id"]), "grupos_max" : mat["num_groups"]})
+        prof.set_prioridades(bloques_horario, [(
+                             (dtp["day"], dtp["time"]),  dtp["preference"]
+                             )  for dtp in p["availability"] ])
+        profesores.append(prof)
+    profesores.sort(key=lambda v: v.id)
+
+    materias = []
+    for m in data["courses"]:
+        nombre = str(m["subject_id"])
+        gs = [g for g in grupos if g.id in m["groups"]]
+        profs = [p for p in profesores if p.id in m["available_professors"]]
+        t_p = "teo" if m["theo_prac"] == True else "prac" if m["theo_prac"] == False else None
+        materias.append(Materia(m["id"], nombre, nombre, m["num_hours"], m["num_days"], gs, profs, m["num_profs"], m["elective"], t_p, m["consecutive_days"], m["no_overlap"], m["elective_no_overlap"]))
+    materias.sort(key=lambda v: v.id)
+
+    superposicion: dict[tuple, Superposicion] = {}
+    for m1 in materias:
+        for m2 in materias:
+            s = (m1.id in m2.no_super) or (m2.id in m1.no_super)
+            superposicion[(m1.id, m2.id)] = Superposicion(1 if s else 0, m1, m2)
+
+    superposicion_electivas: dict[tuple, Superposicion] = {}
+    for m1 in materias:
+        for m2 in materias:
+            s = (m1.id in m2.elec_no_super) or (m2.id in m1.elec_no_super)
+            superposicion_electivas[(m1.id, m2.id)] = Superposicion(1 if s else 0, m1, m2)
+
+
+    return dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas
+
+
+
+
 def generate_instance_json(output_path, materias, grupos, profesores, dias, horarios, turnos, superposicion, superposicion_electivas, mats_dias_consecutivos, p_grupos_simultaneos):
 
     subjects_list = list(set([m.nombre for m in materias]))
