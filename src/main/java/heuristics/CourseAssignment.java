@@ -2,6 +2,8 @@ package heuristics;
 
 import java.util.Set;
 
+import heuristics.entities.Timeslot;
+
 public class CourseAssignment {
     
     public Integer course_id;
@@ -23,6 +25,16 @@ public class CourseAssignment {
         for (DayAssignment da : this.day_assignments)
             copy.day_assignments.add(da.copy());
         return copy;
+    }
+
+    public Set<Timeslot> getAssignedTimeslots(Set<Timeslot> allTimeslots) {
+        Set<Timeslot> assignedTimeslots = new java.util.HashSet<>();
+        for (Timeslot ts : allTimeslots) {
+            if (day_assignments.stream().anyMatch(da -> da.day_id.equals(ts.day.id) && da.time_ids.contains(ts.time.id))) {
+                assignedTimeslots.add(ts);
+            }
+        }
+        return assignedTimeslots;
     }
 
 }

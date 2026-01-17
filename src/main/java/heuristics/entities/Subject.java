@@ -1,8 +1,15 @@
 package heuristics.entities;
 
+import java.util.Set;
+
+import heuristics.UCTInstance;
+
 public class Subject {
 
     public Integer id;
+    public Set<Course> Courses;
+
+
     // Integer num_hours;
     // Integer num_days;
     // Boolean theo_prac;  // true for theoretical, false for practical, null instead
@@ -20,6 +27,12 @@ public class Subject {
 
     public Subject() {
         // Default constructor for JSON deserialization
+    }
+
+    public void compile(UCTInstance instance) {
+        Courses = instance.courses.stream()
+                .filter(c -> c.subject_id.equals(this.id))
+                .collect(java.util.stream.Collectors.toSet());
     }
     
 }

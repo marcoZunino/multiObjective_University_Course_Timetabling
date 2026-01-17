@@ -39,8 +39,17 @@ public class UCTInstance {
     }
 
     public void compile() {
+
         this.timeslots = Timeslot.generateTimeslots(this.days, this.times);
-        // add pre-assigned professors
+
+        subjects.forEach(v -> v.compile(this));
+        courses.forEach(v -> v.compile(this));
+        groups.forEach(v -> v.compile(this));
+        professors.forEach(v -> v.compile(this));
+        days.forEach(v -> v.compile(this));
+        // shifts.forEach(v -> v.compile(this));
+        times.forEach(v -> v.compile(this));
+
     }
 
     public Course getCourseById(Integer course_id) {

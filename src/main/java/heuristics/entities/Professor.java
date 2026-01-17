@@ -2,11 +2,14 @@ package heuristics.entities;
 
 import java.util.Set;
 
+import heuristics.UCTInstance;
+
 public class Professor {
     
     public Integer id;
     public Boolean min_max_days; // true if min days, false if max days, null if none
     public boolean simult_courses; // default false
+    public Set<Timeslot> AvailableTimeslots;
 
     public Set<SubjectGroupsNumber> num_groups_per_subject; // subject_id -> num_groups
     public Set<Preference> availability; // pair<day, time> -> availability (1,2,3), non available if not present
@@ -64,6 +67,28 @@ public class Professor {
             }
         }
         return 0; // or throw an exception if subject not found
+    }
+
+    public void compile(UCTInstance instance) {
+
+        AvailableTimeslots = new java.util.HashSet<>();
+        for (Timeslot ts : instance.timeslots) {
+            if (availability.stream().anyMatch(pref -> pref.day.equals(ts.day.id) && pref.time.equals(ts.time.id))) {
+                AvailableTimeslots.add(ts);
+            }
+        }
+    }
+
+    public int computeTotalPreference(Set<Timeslot> assignedTimeslots) {
+        int totalPreference = 0;
+        for (Timeslot ts : assignedTimeslots) {
+            for (Preference pref : availability) {
+                if (pref.day.equals(ts.day.id) && pref.time.equals(ts.time.id)) {
+                    totalPreference += pref.preference;
+                }
+            }
+        }
+        return totalPreference;
     }
 
 }
