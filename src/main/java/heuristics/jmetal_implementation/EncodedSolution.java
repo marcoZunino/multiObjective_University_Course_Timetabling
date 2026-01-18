@@ -24,7 +24,7 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
     static private UCTInstance instance;
 
-    private Set<Integer> alreadyAssignedProfessors;
+    private Map<Integer, Map<Integer, Integer>> alreadyAssignedProfessors;
     private Map<Integer, Integer> courseIdToIndex;
 
 
@@ -36,7 +36,9 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         
         super(instance.courses.size(), numberOfObjectives, numberOfConstraints);
 
-        alreadyAssignedProfessors = new HashSet<>();
+        alreadyAssignedProfessors = new HashMap<>();
+
+        initializeVariables();
 
         generateInitialAssignments();
 
@@ -46,12 +48,11 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
         super(instance.courses.size(), solution.objectives().length, solution.constraints().length);
 
-        IntStream.range(0, solution.variables().size()).forEach(i -> variables().set(i, solution.variables().get(i).copy()));
         IntStream.range(0, solution.objectives().length).forEach(i -> objectives()[i] = solution.objectives()[i]);
         IntStream.range(0, solution.constraints().length).forEach(i -> constraints()[i] = solution.constraints()[i]);
 
-        setCourseIdToIndex();
-        alreadyAssignedProfessors = new HashSet<>(solution.alreadyAssignedProfessors);
+        initializeVariables(solution.variables());
+        alreadyAssignedProfessors = new HashMap<>(solution.alreadyAssignedProfessors);
     }
 
 
@@ -82,10 +83,23 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
     }
 
 
-    private void setCourseIdToIndex() {
+    private void initializeVariables() {
+
         courseIdToIndex = new HashMap<>();
         int index = 0;
-        for (CourseAssignment ca : variables()) {
+
+        for (Course course : instance.courses) {
+            variables().set(index, new CourseAssignment(course.id, new HashSet<>(), new HashSet<>()));
+            courseIdToIndex.put(course.id, index);
+            index++;
+        }
+    }
+    private void initializeVariables(List<CourseAssignment> coursesAssignments) {
+        courseIdToIndex = new HashMap<>();
+        int index = 0;
+        
+        for (CourseAssignment ca : coursesAssignments) {
+            variables().set(index, ca.copy());
             courseIdToIndex.put(ca.course_id, index);
             index++;
         }
@@ -100,11 +114,6 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
     private void generateInitialAssignments() {
 
-        for (Course course : instance.courses) {
-            variables().add(new CourseAssignment(course.id, new HashSet<>(), new HashSet<>()));
-        }
-        setCourseIdToIndex();
-
         generateInitialProfessorAssignments();
      
         generateInitialTimeslotAssignments(instance.courses.stream().filter(c -> !c.isPractical()).collect(java.util.stream.Collectors.toSet()));
@@ -118,10 +127,14 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
             CourseAssignment ca = getCourseAssignment(course.id);
 
-            for (int i = 0; i < course.num_profs; i++) {
-                Integer prof_id = course.AvailableProfessors.iterator().next().id;
-                if (!alreadyAssignedProfessors.contains(prof_id)) {
+            for (Professor available_professor : course.AvailableProfessors) {
+                Integer prof_id = available_professor.id;
+                if (checkProfessorAvailability(prof_id, course.subject_id)) {
                     ca.professor_ids.add(prof_id);
+                    updateProfessorAvailability(prof_id, course.subject_id);
+                }
+                if (ca.professor_ids.size() == course.num_profs) {
+                    break;
                 }
             }
 
@@ -129,8 +142,6 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
                 // Not enough available professors
                 throw new RuntimeException("Not enough available professors for course " + course.id);
             }
-
-            updateProfessorAvailability(ca.professor_ids, course.subject_id);
 
         }
     }
@@ -263,10 +274,10 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         }
 
         // (3.3) en caso de practico marcar horas/dias anteriores al teorico correspondiente -> asignar primero teoricos
-        if (course.isPractical()) {
-            CourseAssignment tca = getCourseAssignment(course.getTheoreticalCourse().id);
-            nonPenalizedTimeslots.removeAll(tca.getAssignedTimeslots(instance.timeslots));
-        }
+        // if (course.isPractical()) {
+        //     CourseAssignment tca = getCourseAssignment(course.getTheoreticalCourse().id);
+        //     // nonPenalizedTimeslots.removeAll(all timeslots before tca.assignedTimeslots); // TODO
+        // }
 
         // (3.1) marcar horas si se supera la capacidad de salones?
 
@@ -301,33 +312,39 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
     }
 
 
-    private void updateProfessorAvailability(Set<Integer> prof_ids, Integer subject_id) {
-        
-        for (Integer prof_id : prof_ids) {
-
-            Professor professor = instance.professors.stream()
-                    .filter(p -> p.id.equals(prof_id))
-                    .findFirst()
-                    .orElse(null);
-
-            Set<Integer> coursesOfSubject = instance.getCoursesBySubject(subject_id).stream()
-                    .map(c -> c.id)
-                    .collect(java.util.stream.Collectors.toSet());
-
-            int numSubjectAssignedCourses = 0;
-            for (CourseAssignment ca : variables()) {
-                if (coursesOfSubject.contains(ca.course_id)
-                    && ca.professor_ids.contains(prof_id)) {
-                    numSubjectAssignedCourses++;
-                }
-            }
-
-            if (numSubjectAssignedCourses < professor.getNumGroupsForSubject(subject_id)) {
-                return;
-            }
+    private boolean checkProfessorAvailability(Integer prof_id, Integer subject_id) {
                     
-            alreadyAssignedProfessors.add(prof_id);
+        if (!alreadyAssignedProfessors.containsKey(prof_id)) {
+            return true;
         }
+
+        Map<Integer, Integer> subjectAssignments = alreadyAssignedProfessors.get(prof_id);
+        if (!subjectAssignments.containsKey(subject_id)) {
+            return true;
+        }
+        Integer assignmentsCount = subjectAssignments.get(subject_id);
+
+        Professor professor = instance.professors.stream()
+                .filter(p -> p.id.equals(prof_id))
+                .findFirst()
+                .orElse(null);
+        
+        return assignmentsCount < professor.getNumGroupsForSubject(subject_id);
+    }
+
+    private void updateProfessorAvailability(Integer prof_id, Integer subject_id) {
+        
+        if (!alreadyAssignedProfessors.containsKey(prof_id)) {
+            alreadyAssignedProfessors.put(prof_id, new HashMap<>());
+        }
+        Map<Integer, Integer> subjectAssignments = alreadyAssignedProfessors.get(prof_id);
+        if (!subjectAssignments.containsKey(subject_id)) {
+            subjectAssignments.put(subject_id, 1);
+        } else {
+            Integer assignmentsCount = subjectAssignments.get(subject_id);
+            subjectAssignments.put(subject_id, assignmentsCount + 1);
+        }
+
     }
 
 

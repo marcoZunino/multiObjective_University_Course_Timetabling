@@ -14,7 +14,7 @@ public class Group {
     public Set<Timeslot> Timeslots;
     public Set<Timeslot> ExceptionalTimeslots;
 
-    private Integer shift;
+    public Integer shift;
     public Shift GroupShift;
 
     
@@ -44,11 +44,12 @@ public class Group {
         }
 
         Timeslots = new java.util.HashSet<>();
+        ExceptionalTimeslots = new java.util.HashSet<>();
         for (Timeslot ts : instance.timeslots) {
-            if (ts.time.Shifts.contains(this.GroupShift)) {
+            if (ts.time.shifts.contains(this.shift)) {
                 Timeslots.add(ts);
             }
-            if (ts.time.ExceptionalShifts.contains(this.GroupShift)) {
+            if (ts.time.exceptional_shifts.contains(this.shift)) {
                 ExceptionalTimeslots.add(ts);
             }
         }

@@ -22,10 +22,10 @@ public class Course {
     public Set<Course> ElectiveNoOverlapCourses;
 
     // ids
-    private Set<Integer> groups;
-    private Set<Integer> available_professors;
-    private Set<Integer> no_overlap;
-    private Set<Integer> elective_no_overlap;
+    public Set<Integer> groups;
+    public Set<Integer> available_professors;
+    public Set<Integer> no_overlap;
+    public Set<Integer> elective_no_overlap;
 
     
     private Course theoreticalCourse;
@@ -115,6 +115,7 @@ public class Course {
                 this.AvailableProfessors.add(p);
             }
         }
+        assert this.AvailableProfessors.size() >= this.num_profs : "Course " + this.id + " has fewer available professors than required.";
 
         // set NoOverlapCourses
         this.NoOverlapCourses = new java.util.HashSet<>();

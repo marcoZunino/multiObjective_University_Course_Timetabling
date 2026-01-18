@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import heuristics.jmetal_implementation.EncodedSolution;
+
 import java.io.File;
 
 public class Solver {
@@ -21,14 +23,14 @@ public class Solver {
             // this.instance = new UCTInstance();
             ObjectMapper mapper = new ObjectMapper();
             // set instance
-            this.instance = mapper.readValue(new File(inputFilePath), UCTInstance.class);
-            this.instance.compile();
+            instance = mapper.readValue(new File(inputFilePath), UCTInstance.class);
+            instance.compile();
 
-            this.solutions = new java.util.ArrayList<>();
+            solutions = new java.util.ArrayList<>();
 
-            System.out.println("Number of courses: " + this.instance.courses.size());
-            System.out.println("Number of professors: " + this.instance.professors.size());
-            System.out.println("Number of groups: " + this.instance.groups.size());
+            System.out.println("Number of courses: " + instance.courses.size());
+            System.out.println("Number of professors: " + instance.professors.size());
+            System.out.println("Number of groups: " + instance.groups.size());
             
         } catch (IOException e) {
             System.err.println("Error reading input from " + inputFilePath);
@@ -41,7 +43,12 @@ public class Solver {
         // Implement solving logic here using UCTInstance and parameters
         // ...
 
-        // pre-solve with pre-assigned professors and timeslots? //TODO
+        EncodedSolution.setInstance(instance);
+
+        EncodedSolution encodedSolution = new EncodedSolution(3, 0);
+
+        solutions.add(new UCTSolution(encodedSolution.variables()));
+
 
         // Course c = this.instance.courses.iterator().next();
         // Professor p = this.instance.professors.iterator().next();
@@ -80,13 +87,23 @@ public class Solver {
 
 
     public void writeOutput(String outputDirPath) {
-        // Implement writing output file logic here
-        // write solution
+        File outputDir = new File(outputDirPath);
+
+        if (!outputDir.exists()) {
+            boolean created = outputDir.mkdirs();
+            if (!created) {
+                System.err.println("Failed to create output directory: " + outputDirPath);
+                return; // stop execution if directory can't be created
+            }
+        }
+
         for (int i = 0; i < this.solutions.size(); i++) {
             try {
                 String filePath = outputDirPath + "/solution_" + i + ".json";
                 ObjectMapper mapper = new ObjectMapper();
-                mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), this.solutions.get(i));
+                mapper.writerWithDefaultPrettyPrinter()
+                    .writeValue(new File(filePath), this.solutions.get(i));
+
             } catch (IOException e) {
                 System.err.println("Error writing output to " + outputDirPath);
                 e.printStackTrace();
@@ -95,6 +112,7 @@ public class Solver {
 
         System.out.println("Solutions written to " + outputDirPath);
     }
+
 
 
 

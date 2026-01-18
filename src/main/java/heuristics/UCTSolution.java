@@ -1,6 +1,6 @@
 package heuristics;
 
-import java.util.Set;
+import java.util.List;
 
 // public record UCTSolution (
 //     Set<ProfessorCourse> professor_course_assignment, Set<CourseTimeslot> course_timeslot_assignment
@@ -21,11 +21,11 @@ import java.util.Set;
 // }
 
 
-public record UCTSolution (Set<CourseAssignment> course_assignments) {
+public record UCTSolution (List<CourseAssignment> course_assignments) {
 
     static public UCTSolution emptySolution() {
         return new UCTSolution(
-            new java.util.HashSet<>()
+            new java.util.ArrayList<>()
         );
     }
 

@@ -10,8 +10,8 @@ public class Time {
     public Set<Shift> Shifts;
     public Set<Shift> ExceptionalShifts;
 
-    private Set<Integer> shifts;
-    private Set<Integer> exceptional_shifts;
+    public Set<Integer> shifts;
+    public Set<Integer> exceptional_shifts;
 
 
     public Time(Integer id, Set<Integer> shifts, Set<Integer> exceptional_shifts) {
