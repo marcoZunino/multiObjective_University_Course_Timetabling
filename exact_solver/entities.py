@@ -30,6 +30,13 @@ class Horario:
         self.turnos = turnos
         self.turnos_excepcional = turnos_excepcional
 
+    def es_excepcional(self, materia) -> bool:
+
+        for t in materia.turnos():
+            if t in self.turnos_excepcional:
+                return True
+        return False
+
     def __str__(self) -> str:
         return self.inicio + "-" + self.fin
         # return self.id
