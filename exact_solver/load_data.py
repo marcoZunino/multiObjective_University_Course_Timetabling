@@ -436,7 +436,22 @@ def read_json_instance(instance_path):
 
 def generate_instance_json(output_path, materias, grupos, profesores, dias, horarios, turnos, superposicion, superposicion_electivas, mats_dias_consecutivos, p_grupos_simultaneos):
 
-    subjects_list = list(set([m.nombre for m in materias]))
+
+    subjects_list = {
+        int(s) : None
+        for s in list(set([m.nombre for m in materias]))
+    }
+    subjects_list = {key: subjects_list[key] for key in sorted(subjects_list.keys())}
+
+
+    teo = [t for t in materias if t.teo_prac == "teo"]
+    prac = [p for p in materias if p.teo_prac == "prac"]
+    assert len(teo) == len(prac), "Error: no coinciden cantidad de teoricos con practicos"
+
+    for i in range(len(teo)):
+        subjects_list[int(teo[i].nombre)] = int(prac[i].nombre)
+        subjects_list[int(prac[i].nombre)] = int(teo[i].nombre)
+
 
     data = {
 
@@ -460,13 +475,20 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
             } for g in grupos
         ],
 
-        "subjects" : list(range(len(subjects_list))),
+        # "subjects" : list(range(len(subjects_list))),
+        "subjects" : [
+            {
+                "id" : k,
+                "theo_prac_subject_id" : v
+            } for k, v in subjects_list.items()
+        ],
 
         "courses" : [
             {
                 "id" : m.id,
                 # "nombre" : m.nombre,
-                "subject_id" : subjects_list.index(m.nombre),
+                # "subject_id" : subjects_list.index(m.nombre),
+                "subject_id" : int(m.nombre),
                 "num_hours" : m.carga_horaria,
                 "num_days" : m.cantidad_dias,
                 "theo_prac" : True if m.teo_prac == "teo" else False if m.teo_prac == "prac" else None,
@@ -493,7 +515,8 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
                 "id" : p.id,
                 "num_groups_per_subject" : [
                     {
-                        "subject_id" : subjects_list.index(l["nombre_materia"]),
+                        # "subject_id" : subjects_list.index(l["nombre_materia"]),
+                        "subject_id" : int(l["nombre_materia"]),
                         "num_groups" : l["grupos_max"]
                     } for l in p.lista_materias
                 ],

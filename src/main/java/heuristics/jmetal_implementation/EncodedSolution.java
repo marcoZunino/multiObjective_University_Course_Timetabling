@@ -16,20 +16,23 @@ import heuristics.DayAssignment;
 import heuristics.UCTInstance;
 import heuristics.entities.Course;
 import heuristics.entities.Professor;
+import heuristics.entities.Subject;
 import heuristics.entities.Timeslot;
 import heuristics.entities.Group;
 
 
 public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
-    static private UCTInstance instance;
+    private static UCTInstance instance;
 
     private Map<Integer, Map<Integer, Integer>> alreadyAssignedProfessors;
     private Map<Integer, Integer> courseIdToIndex;
 
 
-    static public void setInstance(UCTInstance instance) {
+    public static void setInstance(UCTInstance instance) {
         EncodedSolution.instance = instance;
+
+        preSolveProfessorAssignment();
     }
 
     public EncodedSolution(int numberOfObjectives, int numberOfConstraints) {
@@ -78,8 +81,24 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
             }
         }
 
-        objectives()[0] = (double) preferencesObjective;
-        return objectives()[0];
+        return (double) preferencesObjective;
+    }
+
+    public double evaluateExceptionalTimeslots() {
+
+        int exceptionalTimeslotsObjective = 0;
+
+        for (CourseAssignment ca : variables()) {
+            Course course = instance.getCourseById(ca.course_id);
+            Set<Timeslot> assignedTimeslots = ca.getAssignedTimeslots(instance.timeslots);
+            for (Timeslot ts : assignedTimeslots) {
+                if (course.getExceptionalTimeslots().contains(ts)) {
+                    exceptionalTimeslotsObjective ++;
+                }
+            }
+        }
+
+        return (double) exceptionalTimeslotsObjective;
     }
 
 
@@ -105,7 +124,50 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         }
     }
 
-    public CourseAssignment getCourseAssignment(Integer course_id) {
+    public static void preSolveProfessorAssignment() {
+
+        for (Subject s : instance.subjects) {
+
+            if (s.Courses.size() == 1 || s.getSubjectProfessors().size() == 1) {
+                continue;
+            }
+
+            for (Course c : s.Courses) {
+                // remove professor-course relations where timeslots are insufficient
+                Set<Professor> toRemove = new HashSet<>();
+                for (Professor p : c.AvailableProfessors) {   
+                    if (getAvailableTimeslotsForCourse(c, new HashSet<>(Arrays.asList(p.id))).size() < c.num_hours) {
+                        toRemove.add(p);
+                        p.AvailableCourses.remove(c);
+                    }
+                }
+                for (Professor p : toRemove) {
+                    c.AvailableProfessors.remove(p);
+                    c.available_professors.remove(p.id);
+                    System.out.println("Pre-solve: Removed professor " + p.id + " from course " + c.id + " due to insufficient available timeslots.");
+                }                
+            }
+
+            for (Professor p : s.getSubjectProfessors()) {
+
+                Set<Course> subjectProfessorCourses = s.Courses.stream()
+                        .filter(c -> p.AvailableCourses.contains(c))
+                        .collect(java.util.stream.Collectors.toSet());
+                if (subjectProfessorCourses.size() == 1) {
+                    Course onlyCourse = subjectProfessorCourses.iterator().next();
+                    if (onlyCourse.AvailableProfessors.size() == onlyCourse.num_profs) {
+                        continue; // already exclusive
+                    }
+                    onlyCourse.AvailableProfessors.retainAll(new HashSet<>(Arrays.asList(p)));
+                    onlyCourse.available_professors.retainAll(new HashSet<>(Arrays.asList(p.id)));
+                    System.out.println("Pre-solve: Professor " + p.id + " can only teach course " + onlyCourse.id + " for subject " + s.id + ". Assigned exclusively.");
+                }
+            }
+        }
+
+    }
+
+    private CourseAssignment getCourseAssignment(Integer course_id) {
         Integer index = courseIdToIndex.get(course_id);
         if (index == null)
             return null;
@@ -123,7 +185,13 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
     private void generateInitialProfessorAssignments() {
 
-        for (Course course : instance.courses) {
+        // first assign professors to courses with less available professors
+        Set<Course> sortedCourses = new HashSet<>(instance.courses);
+        sortedCourses = sortedCourses.stream()
+            .sorted((c1, c2) -> Integer.compare(c1.AvailableProfessors.size(), c2.AvailableProfessors.size()))
+            .collect(java.util.stream.Collectors.toCollection(java.util.LinkedHashSet::new));
+
+        for (Course course : sortedCourses) {
 
             CourseAssignment ca = getCourseAssignment(course.id);
 
@@ -152,13 +220,13 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
 
             CourseAssignment ca = getCourseAssignment(course.id);
 
-            Set<Timeslot> availableTimeslots = getAvailableTimeslotsForCourse(course, ca);
+            Set<Timeslot> availableTimeslots = getAvailableTimeslotsForCourse(course, ca.professor_ids);
             Set<Timeslot> nonPenalizedTimeslots = getNonPenalizedTimeslotsForCourse(course, ca, availableTimeslots);
             // availableTimeslots.removeAll(nonPenalizedTimeslots);
 
             for (int i = 0; i < course.num_days; i++) {
                 
-                Integer dayHours = course.nextDayHours(i);
+                int dayHours = course.nextDayHours(i);
                 
                 Set<Timeslot> consecutiveTimeslots = getConsecutiveTimeslots(nonPenalizedTimeslots, dayHours);
                 if (consecutiveTimeslots.isEmpty()) {
@@ -174,13 +242,14 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
                 
                 ca.day_assignments.add(da);
 
-                updateAvailableTimeslots(course, da, availableTimeslots, nonPenalizedTimeslots);
-                
+                if (ca.day_assignments.size() < course.num_days) {
+                    updateAvailableTimeslots(course, da, availableTimeslots, nonPenalizedTimeslots);
+                }
             }
         }
     }
 
-    private Set<Timeslot> getConsecutiveTimeslots(Set<Timeslot> timeslots, int requiredCount) {
+    private static Set<Timeslot> getConsecutiveTimeslots(Set<Timeslot> timeslots, int requiredCount) {
         
         Map<Integer, Set<Timeslot>> timeslotsByDay = new HashMap<>();  // group by day
         for (Timeslot ts : timeslots) {
@@ -228,7 +297,7 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         return new HashSet<>();
     }
 
-    private Set<Timeslot> getAvailableTimeslotsForCourse(Course course, CourseAssignment ca) {   
+    private static Set<Timeslot> getAvailableTimeslotsForCourse(Course course, Set<Integer> prof_ids) {   
         // inicializar horas disponibles segun turno de los grupos asignados
 
         Set<Timeslot> availableTimeslots = new HashSet<>();
@@ -246,7 +315,7 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         //      - restar horas no disponibles
         //      - restar horas asignadas a otros cursos (if !prof.simult_courses)
 
-        for (Integer prof_id : ca.professor_ids) {
+        for (Integer prof_id : prof_ids) {
             Professor professor = course.AvailableProfessors.stream()
                     .filter(p -> p.id.equals(prof_id))
                     .findFirst()
@@ -265,7 +334,7 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         
         Set<Timeslot> nonPenalizedTimeslots = new HashSet<>(availableTimeslots);
 
-        // (1.1) marcar horas asignadas a cursos en no_overlap -> seleccionar primero horas no marcadas
+        // (1.1) penalizar horas asignadas a cursos en no_overlap
         for (Course no_overlap_course : course.NoOverlapCourses) {
             CourseAssignment no_overlap_ca = getCourseAssignment(no_overlap_course.id);
             if (no_overlap_ca != null) {
@@ -273,15 +342,15 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
             }
         }
 
-        // (3.3) en caso de practico marcar horas/dias anteriores al teorico correspondiente -> asignar primero teoricos
+        // (3.3) en caso de practico penalizar horas/dias anteriores al teorico correspondiente -> asignar primero teoricos
         // if (course.isPractical()) {
         //     CourseAssignment tca = getCourseAssignment(course.getTheoreticalCourse().id);
         //     // nonPenalizedTimeslots.removeAll(all timeslots before tca.assignedTimeslots); // TODO
         // }
 
-        // (3.1) marcar horas si se supera la capacidad de salones?
+        // (3.1) penalizar horas si se supera la capacidad de salones?
 
-        // (3.4) marcar horas excepcionales si se supera el limite (si se pide como restriccion)
+        // (3.4) penalizar horas excepcionales si se supera el limite (si se pide como restriccion)
         for (Group group : course.Groups) {
             nonPenalizedTimeslots.removeAll(group.ExceptionalTimeslots);
         }
@@ -291,7 +360,7 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         return nonPenalizedTimeslots;
     }
 
-    private void updateAvailableTimeslots(Course course, DayAssignment da, Set<Timeslot> availableTimeslots, Set<Timeslot> nonPenalizedTimeslots) {
+    private static void updateAvailableTimeslots(Course course, DayAssignment da, Set<Timeslot> availableTimeslots, Set<Timeslot> nonPenalizedTimeslots) {
         
         Set<Timeslot> timeslotsToRemove = new HashSet<>();
 

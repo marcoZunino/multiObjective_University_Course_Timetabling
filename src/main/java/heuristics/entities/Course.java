@@ -16,6 +16,7 @@ public class Course {
     public boolean consecutive_days;
     public Boolean theo_prac;
 
+    public Subject courseSubject;
     public Set<Group> Groups;
     public Set<Professor> AvailableProfessors;
     public Set<Course> NoOverlapCourses;
@@ -28,8 +29,7 @@ public class Course {
     public Set<Integer> elective_no_overlap;
 
     
-    private Course theoreticalCourse;
-    private Course practicalCourse;
+    public Course theo_prac_course;
     
 
     public int maxHoursPerDay() {
@@ -39,7 +39,7 @@ public class Course {
         return (int) Math.floor((double) num_hours / (double) num_days);
     }
     public int nextDayHours(int dayIndex) {
-        if (dayIndex < num_hours % minHoursPerDay()) {
+        if (dayIndex < num_hours % num_days) {
             return maxHoursPerDay();
         } else {
             return minHoursPerDay();
@@ -52,21 +52,19 @@ public class Course {
     public boolean isPractical() {
         return Boolean.FALSE.equals(theo_prac);
     }
-    public Course getTheoreticalCourse() {
-        if (isPractical()) {
-            return theoreticalCourse;
-        }
-        return null;
-    }
-    public Course getPracticalCourse() {
-        if (isTheoretical()) {
-            return practicalCourse;
-        }
-        return null;
-    }
+
     // variables
     // public Set<Timeslot> assigned_timeslots;
     // public Set<Integer> assigned_professors;
+
+    public Set<Timeslot> getExceptionalTimeslots() {
+
+        Set<Timeslot> exceptionalTimeslots = new java.util.HashSet<>();
+        for (Group group : Groups) {
+            exceptionalTimeslots.addAll(group.ExceptionalTimeslots);
+        }
+        return exceptionalTimeslots;
+    }
     
 
     public Course(Integer id, Integer subject_id, Set<Integer> available_professors, Integer num_profs, Set<Integer> groups, Set<Integer> no_overlap, Set<Integer> elective_no_overlap, boolean elective, boolean consecutive_days, Integer num_days, Integer num_hours, Boolean theo_prac) {
@@ -133,7 +131,22 @@ public class Course {
             }
         }
 
-        // set theoretical/practical courses // TODO
+        // set Subject
+        for (Subject s : instance.subjects) {
+            if (s.id.equals(this.subject_id)) {
+                this.courseSubject = s;
+                break;
+            }
+        }
+
+        if (theo_prac != null && theo_prac_course != null) {
+            for (Course c : courseSubject.theo_prac_subject.Courses) {
+                if (c.groups.equals(this.groups)) {
+                    this.theo_prac_course = c;
+                    break;
+                }
+            }
+        }
 
     }
 

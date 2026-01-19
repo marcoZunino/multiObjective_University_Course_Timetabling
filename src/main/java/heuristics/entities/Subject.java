@@ -7,7 +7,20 @@ import heuristics.UCTInstance;
 public class Subject {
 
     public Integer id;
+    public Integer theo_prac_subject_id;
+
     public Set<Course> Courses;
+    public Subject theo_prac_subject;
+
+    public Set<Professor> getSubjectProfessors() {
+        Set<Professor> professors = new java.util.HashSet<>();
+        for (Course c : Courses) {
+            for (Professor prof : c.AvailableProfessors) {
+                professors.add(prof);
+            }
+        }
+        return professors;
+    }
 
 
     // Integer num_hours;
@@ -30,9 +43,17 @@ public class Subject {
     }
 
     public void compile(UCTInstance instance) {
+        
         Courses = instance.courses.stream()
                 .filter(c -> c.subject_id.equals(this.id))
                 .collect(java.util.stream.Collectors.toSet());
+        
+        if (this.theo_prac_subject_id != null) {
+            theo_prac_subject = instance.subjects.stream()
+                .filter(s -> s.id.equals(this.theo_prac_subject_id))
+                .findFirst()
+                .orElse(null);
+        }
     }
     
 }

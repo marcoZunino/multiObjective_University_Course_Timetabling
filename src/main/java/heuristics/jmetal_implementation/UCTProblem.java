@@ -39,12 +39,10 @@ public class UCTProblem implements Problem<EncodedSolution> {
         // // Placeholder implementation
         // int var0 = solution.getVariableValue(0);
 
-        solution.evaluatePreferences();
-        // double objective2 = solution.evaluateMinMaxDays();
-        // ...
 
-        // solution.setObjective(0, objective1);
-        // solution.setObjective(1, objective2);
+        solution.objectives()[0] = solution.evaluatePreferences();
+        solution.objectives()[1] = solution.evaluateExceptionalTimeslots();
+
         return solution;
     }
 

@@ -9,10 +9,12 @@ public class Professor {
     public Integer id;
     public Boolean min_max_days; // true if min days, false if max days, null if none
     public boolean simult_courses; // default false
+    
     public Set<Timeslot> AvailableTimeslots;
-
+    public Set<Course> AvailableCourses;
     public Set<SubjectGroupsNumber> num_groups_per_subject; // subject_id -> num_groups
     public Set<Preference> availability; // pair<day, time> -> availability (1,2,3), non available if not present
+
 
     // public Set<Integer> assigned_courses;
     // public Set<Timeslot> assigned_timeslots;
@@ -75,6 +77,16 @@ public class Professor {
         for (Timeslot ts : instance.timeslots) {
             if (availability.stream().anyMatch(pref -> pref.day.equals(ts.day.id) && pref.time.equals(ts.time.id))) {
                 AvailableTimeslots.add(ts);
+            }
+        }
+
+        AvailableCourses = new java.util.HashSet<>();
+        for (Course c : instance.courses) {
+            for (Integer prof_id : c.available_professors) {
+                if (prof_id.equals(this.id)) {
+                    AvailableCourses.add(c);
+                    break;
+                }
             }
         }
     }
