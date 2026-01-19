@@ -19,9 +19,7 @@ public class CourseAssignment {
     }
 
     public CourseAssignment copy() {
-        CourseAssignment copy = new CourseAssignment();
-        copy.course_id = this.course_id;
-        copy.professor_ids = Set.copyOf(this.professor_ids);
+        CourseAssignment copy = new CourseAssignment(this.course_id, Set.copyOf(this.professor_ids), new java.util.HashSet<>());
         for (DayAssignment da : this.day_assignments)
             copy.day_assignments.add(da.copy());
         return copy;

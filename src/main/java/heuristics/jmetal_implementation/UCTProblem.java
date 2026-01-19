@@ -10,7 +10,7 @@ public class UCTProblem implements Problem<EncodedSolution> {
     public UCTInstance instance;
 
 
-    public UCTProblem(UCTInstance instance) {
+    public UCTProblem(UCTInstance instance) { // add params
         this.instance = instance;
         EncodedSolution.setInstance(instance);
         // this.numberOfObjectives = ...
@@ -22,11 +22,11 @@ public class UCTProblem implements Problem<EncodedSolution> {
     }
 
     public int numberOfObjectives() {
-        return 2; // Example: two objectives
+        return 4;
     }
 
     public int numberOfConstraints() {
-        return 0; // Example: two objectives
+        return 0;
     }
 
     public String name() {
@@ -35,13 +35,11 @@ public class UCTProblem implements Problem<EncodedSolution> {
 
     @Override
     public EncodedSolution evaluate(EncodedSolution solution) {
-        // // Implement the evaluation logic here
-        // // Placeholder implementation
-        // int var0 = solution.getVariableValue(0);
-
 
         solution.objectives()[0] = solution.evaluatePreferences();
         solution.objectives()[1] = solution.evaluateExceptionalTimeslots();
+        solution.objectives()[2] = solution.evaluateProfessorDays();
+        solution.objectives()[3] = solution.evaluateElectiveOverlap();
 
         return solution;
     }

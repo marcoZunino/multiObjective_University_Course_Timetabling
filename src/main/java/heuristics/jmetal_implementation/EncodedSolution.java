@@ -58,6 +58,16 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         alreadyAssignedProfessors = new HashMap<>(solution.alreadyAssignedProfessors);
     }
 
+    public EncodedSolution(List<CourseAssignment> coursesAssignments) {
+        
+        super(instance.courses.size(), 4, 0); // 4 objectives, 0 constraints
+
+        alreadyAssignedProfessors = new HashMap<>();
+
+        initializeVariables(coursesAssignments);
+
+    }
+
 
     @Override
     public EncodedSolution copy() {
@@ -84,12 +94,18 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         return (double) preferencesObjective;
     }
 
-    public double evaluateExceptionalTimeslots() {
+    public double evaluateExceptionalTimeslots(Boolean onlyPracticalCourses) {
 
         int exceptionalTimeslotsObjective = 0;
 
         for (CourseAssignment ca : variables()) {
             Course course = instance.getCourseById(ca.course_id);
+            if (Boolean.TRUE.equals(onlyPracticalCourses) && !course.isPractical()) {
+                continue;
+            }
+            if (Boolean.FALSE.equals(onlyPracticalCourses) && course.isPractical()) {
+                continue;
+            }
             Set<Timeslot> assignedTimeslots = ca.getAssignedTimeslots(instance.timeslots);
             for (Timeslot ts : assignedTimeslots) {
                 if (course.getExceptionalTimeslots().contains(ts)) {
@@ -99,6 +115,64 @@ public class EncodedSolution extends AbstractSolution<CourseAssignment> {
         }
 
         return (double) exceptionalTimeslotsObjective;
+    }
+    public double evaluateExceptionalTimeslots() {
+        return evaluateExceptionalTimeslots(null);
+    }
+
+    public double evaluateProfessorDays() {
+        
+        Map<Integer, Set<Integer>> dayListPerProfessor = new HashMap<>();
+
+        for (CourseAssignment ca : variables()) {
+
+            Set<Timeslot> assignedTimeslots = ca.getAssignedTimeslots(instance.timeslots);
+            for (Integer prof_id : ca.professor_ids) {
+                Professor professor = instance.professors.stream()
+                    .filter(p -> p.id.equals(prof_id))
+                    .findFirst()
+                    .orElse(null);
+                
+                if (professor != null && professor.min_max_days == null) {
+                    continue;
+                }
+
+                if (!dayListPerProfessor.containsKey(prof_id)) {
+                    dayListPerProfessor.put(prof_id, new HashSet<>());
+                }
+                for (Timeslot ts : assignedTimeslots) {
+                    dayListPerProfessor.get(prof_id).add(ts.day.id);
+                }
+            }
+        }
+
+        return (double) dayListPerProfessor.values().stream().mapToInt(Set::size).sum();
+    }
+
+    public double evaluateElectiveOverlap() {
+        
+        int count = 0;
+        for (CourseAssignment ca : variables()) {
+            Course course = instance.getCourseById(ca.course_id);
+            if (!course.elective) {
+                continue;
+            }
+            for (Course course2 : course.ElectiveNoOverlapCourses) {
+                CourseAssignment ca2 = getCourseAssignment(course2.id);
+                if (ca2 == null || !course2.elective) {
+                    continue;
+                }
+                Set<Timeslot> ts1 = ca.getAssignedTimeslots(instance.timeslots);
+                Set<Timeslot> ts2 = ca2.getAssignedTimeslots(instance.timeslots);
+                for (Timeslot t : ts1) {
+                    if (ts2.contains(t)) {
+                        count++;
+                    }
+                }
+            }
+
+        }
+        return (double) count;
     }
 
 

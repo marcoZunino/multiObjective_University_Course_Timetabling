@@ -45,44 +45,43 @@ public class Solver {
 
         EncodedSolution.setInstance(instance);
 
-        EncodedSolution encodedSolution = new EncodedSolution(3, 0);
+        // EncodedSolution encodedSolution = new EncodedSolution(3, 0);
+        EncodedSolution encodedSolution = readSolution("results/solution_min_days_excep_ts.json");
 
-        solutions.add(new UCTSolution(encodedSolution.variables()));
+        System.out.println("Preference objective value: " + encodedSolution.evaluatePreferences());
+        System.out.println("Exceptional timeslots objective value: " + encodedSolution.evaluateExceptionalTimeslots() + 
+            " (only practical courses: " + encodedSolution.evaluateExceptionalTimeslots(true) + 
+            ", only theoretical courses: " + encodedSolution.evaluateExceptionalTimeslots(false) + ")");
+        System.out.println("Professor days objective value: " + encodedSolution.evaluateProfessorDays());
+        System.out.println("Elective overlap objective value: " + encodedSolution.evaluateElectiveOverlap());
 
-
-        // Course c = this.instance.courses.iterator().next();
-        // Professor p = this.instance.professors.iterator().next();
-        // c.assigned_professors.add(p.id);
-        // Iterator<Timeslot> timeslotIterator = this.instance.timeslots.iterator();
-        // for (int i=0; i < c.num_hours; i++) {
-        //     c.assigned_timeslots.add(timeslotIterator.next());
-        // }
-
-        // // compileSolution();
+        compileSolution(encodedSolution);
 
     }
 
-    // public void compileSolution() {
+    public void compileSolution(EncodedSolution encodedSolution) {
+        solutions.add(new UCTSolution(encodedSolution.variables()));
+    }
 
-    //     // set solution
-
-    //     Set<UCTSolution.ProfessorCourse> professor_course_assignment = new java.util.HashSet<>();
-    //     Set<UCTSolution.CourseTimeslot> course_timeslot_assignment = new java.util.HashSet<>();
+    public EncodedSolution readSolution(String inputFilePath) {
+        // Implement reading input file logic here
         
-    //     for (Course c : this.instance.courses) {
-    //         // dummy assignments for illustration
-    //         for (Timeslot ts : c.assigned_timeslots) {
-    //             course_timeslot_assignment.add(
-    //                 new UCTSolution.CourseTimeslot(c.id, ts.day.id, ts.time.id)
-    //             );
-    //         }
-    //         for (Integer prof_id : c.assigned_professors) {
-    //             professor_course_assignment.add(
-    //                 new UCTSolution.ProfessorCourse(c.id, prof_id)
-    //             );
-    //         }
-    //     }
-    // }
+        try {
+            // this.instance = new UCTInstance();
+            ObjectMapper mapper = new ObjectMapper();
+            // set instance
+            UCTSolution solution = mapper.readValue(new File(inputFilePath), UCTSolution.class);
+
+            return new EncodedSolution(solution.course_assignments);
+            
+        } catch (IOException e) {
+            System.err.println("Error reading input from " + inputFilePath);
+            e.printStackTrace();
+        }
+
+        return null;
+        
+    }
 
 
 
@@ -109,8 +108,9 @@ public class Solver {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Solutions written to " + outputDirPath);
+        if (this.solutions.size() > 0) {
+            System.out.println("Solutions written to " + outputDirPath);
+        }
     }
 
 
@@ -123,11 +123,20 @@ public class Solver {
         solver.readInput("instances/instance_2026sem1.json");
         // solver.readInput("instances/example.json");
 
+        // for (Course course : solver.instance.courses) {
+        //     System.out.println("Course ID: " + course.id + ", theo_prac: " + course.theo_prac);
+        //     if (course.isPractical()) System.out.println("  Theoretical Course: " + course.theo_prac_course.id);
+        //     if (course.isTheoretical()) System.out.println("  Practical Course: " + course.theo_prac_course.id);
+
+
+        // }
+        // for (Subject subject : solver.instance.subjects) {
+        //     System.out.println("Subject ID: " + subject.id + ", TheoPrac id " + subject.theo_prac_subject_id);
+        // }
         solver.solve(params);
 
-        solver.writeOutput("results/instance_2026sem1");
+        // solver.writeOutput("results/instance_2026sem1");
 
-        // Further processing
     }
     
 }
