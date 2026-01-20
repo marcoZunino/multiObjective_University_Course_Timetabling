@@ -428,13 +428,14 @@ def read_json_instance(instance_path):
             s = (m1.id in m2.elec_no_super) or (m2.id in m1.elec_no_super)
             superposicion_electivas[(m1.id, m2.id)] = Superposicion(1 if s else 0, m1, m2)
 
+    num_salones = data["num_rooms"]
 
-    return dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas
+    return dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas, num_salones
 
 
 
 
-def generate_instance_json(output_path, materias, grupos, profesores, dias, horarios, turnos, superposicion, superposicion_electivas, mats_dias_consecutivos, p_grupos_simultaneos):
+def generate_instance_json(output_path, materias, grupos, profesores, dias, horarios, turnos, superposicion, superposicion_electivas, num_salones):
 
 
     subjects_list = {
@@ -496,7 +497,7 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
                 "available_professors" : [p.id for p in m.profesores],
                 "groups" : [g.id for g in m.grupos],
                 "elective" : m.electiva,
-                "consecutive_days" : m in mats_dias_consecutivos, # True/False
+                "consecutive_days" : m in [mat for mat in materias if mat.dias_consecutivos], # True/False
                 "no_overlap" : [
                     mats_pair[1] for mats_pair in superposicion
                     if mats_pair[0] == m.id and superposicion[mats_pair].value == 1
@@ -521,7 +522,7 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
                     } for l in p.lista_materias
                 ],
                 # "name" : p.nombre,
-                "simult_courses" : p.nombre in p_grupos_simultaneos,
+                "simult_courses" : p in [p for p in profesores if p.cursos_simultaneos],
                 "min_max_days" : True if p.min_max_dias == "min" else False if p.min_max_dias == "max" else None,
                 "availability" : [
                     {   
@@ -540,6 +541,8 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
         #         "time" : b.horario.id,
         #     } for b in bloques_horario.values()
         # ],   # solo si se usan ids enteros, en lugar de tuplas (d,h)
+
+        "num_rooms" : num_salones
     
     }
     

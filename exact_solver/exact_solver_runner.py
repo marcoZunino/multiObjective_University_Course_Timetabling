@@ -12,7 +12,7 @@ class Instance:
     
     def __init__(self, input_file):
         
-        dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas = read_json_instance(input_file)
+        dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas, num_salones = read_json_instance(input_file)
         
         self.dias : list[Dia] = dias
         self.turnos = turnos
@@ -32,7 +32,7 @@ class Instance:
         self.grupos_ids = [g.id for g in grupos]
         self.materias_ids = [m.id for m in materias]
 
-        self.num_salones = 13  # parametro fijo por ahora  #TODO: pasarlo como input
+        self.num_salones = num_salones  # parametro fijo por ahora  #TODO: pasarlo como input
 
         self.model : gp.Model = None
 
@@ -105,33 +105,33 @@ class Instance:
     def compile_constraints(self):
         
         # ### Seleccionar restricciones
-        self.constr_superposicion()
+        
         self.constr_carga_horaria()
         self.constr_dias_materia()
         self.constr_max_min_horas()
-
         self.constr_turnos_materia()
         self.constr_horas_consecutivas()
         self.constr_dias_consecutivos()
         
-        self.constr_no_disponible_profesor()
-        self.constr_unica_materia_profesor()
         self.constr_limitar_profesores_materia()
         self.constr_cantidad_profesores()
+        self.constr_no_disponible_profesor()
         self.constr_grupos_max_profesor()
 
         self.constr_definir_y()
         self.constr_definir_z()
+        self.constr_definir_x()
+
+
+        self.constr_superposicion()        
+        self.constr_unica_materia_profesor()
 
         self.constr_cantidad_salones()
         self.constr_teo_prac()
-
-        self.constr_definir_x()
         self.constr_horas_puente_grupos()
 
 
-        # if ...  #TODO
-        self.constr_horarios_excepcionales(7, 1)   # (opcional) limitar cantidad de horas excepcionales
+        # self.constr_horarios_excepcionales(7, 1)   # (opcional) limitar cantidad de horas excepcionales
 
         print("Restricciones:", self.model.NumConstrs)
 
@@ -141,7 +141,7 @@ class Instance:
         self.objectives = { # name : (expr, weight)
             
             "prioridades" : (self.obj_prioridades(), 0), # weight = 1
-            "min_max_dias" : (self.obj_min_max_dias()[0], 1), # weight = 5
+            "min_max_dias" : (self.obj_min_max_dias(), 1), # weight = 5
             "superposicion_electivas" : (self.obj_superposicion_electivas(), 0), # weight = 10
             "horarios_excepcionales (practico)" : (self.obj_horarios_excepcionales(prac=True), 0), # weight = 50
             "horarios_excepcionales" : (self.obj_horarios_excepcionales(prac=False), 0), # weight = 100
@@ -381,13 +381,11 @@ class Instance:
     def obj_min_max_dias(self):
 
         OBJ2 = gp.LinExpr()
-        DP = {}
 
         count = 0
         for p in self.profesores:
             
             D_p = gp.quicksum(self.z_dict[p.id,d].variable for d in self.dias_ids)
-            DP[p.id] = D_p
 
             # filtrar si el profesor prefiere minimizar o maximizar o ninguno
             match p.min_max_dias:
@@ -402,7 +400,7 @@ class Instance:
 
         print("obj_min_max_dias terms:", count)
 
-        return OBJ2, DP
+        return OBJ2
 
     # ### (4.3) Minimizar horas puente por grupo (se incluye directamente como restriccion)
     def obj_horas_puente_grupos(self):
@@ -455,5 +453,5 @@ class Instance:
 
 
 if __name__ == "__main__":
-    instance = Instance("instances/instance_2026sem1.json")
+    instance = Instance("instances/instance_2025sem2.json")
     instance.solve()

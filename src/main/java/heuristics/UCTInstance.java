@@ -21,6 +21,7 @@ public class UCTInstance {
     public Set<Shift> shifts;
     public Set<Time> times;
     public Set<Timeslot> timeslots;
+    public Integer num_rooms;
 
     public UCTInstance(Set<Subject> subjects, Set<Course> courses, Set<Group> groups,
             Set<Professor> professors, Set<Day> days, Set<Shift> shifts, Set<Time> times) {

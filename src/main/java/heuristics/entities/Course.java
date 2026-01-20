@@ -102,7 +102,6 @@ public class Course {
         for (Group g : instance.groups) {
             if (this.groups.contains(g.id)) {
                 this.Groups.add(g);
-                break;
             }
         }
         
