@@ -1,3 +1,4 @@
+
 from entities import *
 from variables import *
 import random
@@ -6,6 +7,7 @@ from gurobipy import *
 import gurobipy as gp
 import json
 import os
+import argparse
 
 # funciones para cargar datos en entidades
 
@@ -173,48 +175,14 @@ def copy_variables_excel(u_dict: dict[tuple, u], w_dict: dict[tuple, w], output)
         pd.DataFrame(data_u).to_excel(writer, sheet_name="u", index=False)
         pd.DataFrame(data_w).to_excel(writer, sheet_name="w", index=False)
 
-def save_solution_json(u_dict: dict[tuple, u], v_dict: dict[tuple, v], w_dict: dict[tuple, w], output):
 
-    course_ids = list(set([u_i[0] for u_i in u_dict]))
-    prof_ids = list(set([w_i[1] for w_i in w_dict]))
-    day_ids = list(set([v_i[1] for v_i in v_dict]))
-    time_ids = list(set([u_dict[u_i].horario.horario.id for u_i in u_dict]))
-
-    data = {
-
-        # "professor_course_assignment" : [
-        #     {
-        #         "professor" : w_dict[w_i].profesor.id,
-        #         "course" : w_dict[w_i].materia.id,
-
-        #     } for w_i in w_dict if round(w_dict[w_i].variable.x) == 1
-        # ],
-
-        "course_assignments" : [
-            {
-                "course_id" : c,
-
-                "professor_ids" : [
-                    p for p in prof_ids
-                    if round(w_dict[(c, p)].variable.x) == 1
-                ],
-                "day_assignments" : [
-                    {
-                        "day_id" : d,
-                        "time_ids" : [
-                            t for t in time_ids
-                            if round(u_dict[(c, (d, t))].variable.x) == 1
-                        ],
-                    } for d in day_ids if round(v_dict[(c, d)].variable.x) == 1
-                ],
-            } for c in course_ids
-        ],
-    }
-
-    with open(output, 'w') as f:
-        if not os.path.exists(os.path.dirname(output)):
-            os.makedirs(os.path.dirname(output))
-        json.dump(data, f, indent=4)
+def none_or_float(value: str):
+    if value.lower() == "none":
+        return None
+    try:
+        return float(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"{value} no es un número válido ni 'None'")
 
     
 
@@ -434,7 +402,6 @@ def read_json_instance(instance_path):
 
 
 
-
 def generate_instance_json(output_path, materias, grupos, profesores, dias, horarios, turnos, superposicion, superposicion_electivas, num_salones):
 
 
@@ -550,3 +517,78 @@ def generate_instance_json(output_path, materias, grupos, profesores, dias, hora
     with open(output_path, 'w') as f:
         json.dump(data, f, indent=4)
 
+
+
+def save_solution_json(u_dict: dict[tuple, u], v_dict: dict[tuple, v], w_dict: dict[tuple, w], output, info=None):
+
+    course_ids = list(set([u_i[0] for u_i in u_dict]))
+    prof_ids = list(set([w_i[1] for w_i in w_dict]))
+    day_ids = list(set([v_i[1] for v_i in v_dict]))
+    time_ids = list(set([u_dict[u_i].horario.horario.id for u_i in u_dict]))
+
+    data = {}
+
+    if info is not None:
+        data["info"] = info
+
+    data["course_assignments"] = [{
+        
+                "course_id" : c,
+
+                "professor_ids" : [
+                    p for p in prof_ids
+                    if round(w_dict[(c, p)].variable.x) == 1
+                ],
+                "day_assignments" : [
+                    {
+                        "day_id" : d,
+                        "time_ids" : [
+                            t for t in time_ids
+                            if round(u_dict[(c, (d, t))].variable.x) == 1
+                        ],
+                    } for d in day_ids if round(v_dict[(c, d)].variable.x) == 1
+                ],
+        } for c in course_ids]
+    
+    # "professor_course_assignment" : [
+    #     {
+    #         "professor" : w_dict[w_i].profesor.id,
+    #         "course" : w_dict[w_i].materia.id,
+    #     } for w_i in w_dict if round(w_dict[w_i].variable.x) == 1
+    # ],
+
+
+    if os.path.exists(output):
+        base, ext = os.path.splitext(output)
+        output = f"{base}_{len(os.listdir(os.path.dirname(output)))}{ext}"
+        
+    elif not os.path.exists(os.path.dirname(output)):
+        os.makedirs(os.path.dirname(output))
+
+    with open(output, 'w') as f:
+        json.dump(data, f, indent=4)
+    print(f"Saved solution to {output}")
+
+
+
+def read_json_solution(solution_path):
+    
+    with open(solution_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    solution_assignments = {"u_dict" : [], "v_dict" : [], "w_dict" : []}
+
+    for course in data["course_assignments"]:
+        c_id = course["course_id"]
+
+        for prof_id in course["professor_ids"]:
+            solution_assignments["w_dict"].append((c_id, prof_id))
+
+        for day_assignment in course["day_assignments"]:
+            d_id = day_assignment["day_id"]
+            solution_assignments["v_dict"].append((c_id, d_id))
+
+            for t_id in day_assignment["time_ids"]:
+                solution_assignments["u_dict"].append((c_id, (d_id, t_id)))
+
+    return solution_assignments

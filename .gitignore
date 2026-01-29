@@ -30,3 +30,5 @@ exact_solver/solver.ipynb
 
 # Ignore build directories
 target/
+
+informe/

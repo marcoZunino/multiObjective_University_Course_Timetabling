@@ -1,18 +1,70 @@
 
-from gurobipy import *
+from pyexpat import model
+from xml.parsers.expat import model
+import gurobipy as gp
+import argparse
 
 from load_data import *
 from entities import *
 from variables import *
 
 
-# parametros: input_file, output_file, time_limit, mip_gap
+class Objective:
+
+    def __init__(self, id, name, expr_lambda):
+        self.id = id
+        self.name = name
+        self.expr_lambda = expr_lambda
+        self.__expr = None
+        self.weight = 0
+        self.priority = None
+        self.rng = None
+        self.value = None
+        self.slack = None # slack variable
+        self.upper_bound = None
+
+    def set_params(self, weight=0, priority=None, upper_bound=None, rng=None):
+        self.weight = weight
+        self.priority = priority
+        self.upper_bound = upper_bound
+        self.rng = rng
+    
+    def reset(self):
+        # self.weight = 0
+        # self.priority = None
+        # self.upper_bound = None
+        # self.rng = None
+        self.value = None
+        self.__expr = None
+    
+    @property
+    def expr(self):
+        if self.__expr is None:
+            self.__expr = self.expr_lambda()
+        return self.__expr
+
+    def evaluate(self):
+
+        if self.value is None:
+            try:
+                self.value = self.expr.getValue()
+            except:
+                return None
+        return self.value
+    
+
+    def __str__(self):
+        return f"\t{self.name}: \t{" "*(35-len(self.name))}{round(self.evaluate())} \t(w={self.weight}, pr={self.priority}, UB={self.upper_bound})"
+
+    
 
 class Instance:
     
-    def __init__(self, input_file):
+    def __init__(self, name):
+
+        self.name = name
         
-        dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas, num_salones = read_json_instance(input_file)
+        dias, turnos, horarios, bloques_horario, grupos, materias, profesores, superposicion, superposicion_electivas, num_salones = read_json_instance(f"instances/{name}.json")
         
         self.dias : list[Dia] = dias
         self.turnos = turnos
@@ -32,9 +84,10 @@ class Instance:
         self.grupos_ids = [g.id for g in grupos]
         self.materias_ids = [m.id for m in materias]
 
-        self.num_salones = num_salones  # parametro fijo por ahora  #TODO: pasarlo como input
+        self.num_salones = num_salones
 
         self.model : gp.Model = None
+        self.feasibility = None
 
         self.u_dict : dict[tuple, u] = {}
         self.v_dict : dict[tuple, v] = {}
@@ -43,24 +96,97 @@ class Instance:
         self.y_dict : dict[tuple, y] = {}
         self.z_dict : dict[tuple, z] = {}
 
-        self.objectives : dict[str, tuple] = {}
+        self.objectives = [
+            Objective(0, "except_timeslots", self.obj_horarios_excepcionales_gral),
+            Objective(1, "elective_overlap", self.obj_superposicion_electivas),
+            Objective(2, "prof_days", self.obj_min_max_dias),
+            Objective(3, "preference", self.obj_prioridades),
+        ]
 
 
+    def json_params(self):
+        return {
+            "instance": self.name,
+            "method": self.params.method,
+            "exec_time": self.model.Runtime if self.model else None,
+            "objectives": [
+                {
+                    "name": obj.name,
+                    "weight": obj.weight,
+                    "priority": obj.priority,
+                    "upper_bound": obj.upper_bound,
+                    "rng": obj.rng,
+                    "value": obj.evaluate(),
+                } for obj in self.objectives
+            ]
+        }
 
-    def solve(self):
+
+    def solve(self, params):
+
+        # parametros: input_file, output_file, time_limit, mip_gap
             
-        self.model: gp.Model = gp.Model("timetable")
+        self.model: gp.Model = gp.Model(self.name)
+        self.params = params
+
+        match self.params.method:
+            
+            case "weighted_sum":
+
+                for obj in self.objectives:
+                    obj.set_params(weight=self.params.weights[obj.id], upper_bound=self.params.upper_bounds[obj.id])
+
+            case "augmecon":
+
+                for obj in self.objectives:
+                    obj.set_params(priority=self.params.priorities[obj.id], rng=self.params.ranges[obj.id], upper_bound=self.params.upper_bounds[obj.id])
+
 
         self.compile_variables()
         self.compile_constraints()
         self.compile_objectives()
 
-        self.optimize()
+        if self.params.starting_solution is not None:
+            self.set_starting_solution(self.params.starting_solution)
+
+        try:
+            self.optimize()
+        except gp.GurobiError as e:
+            print(f"Gurobi Error during optimization: {e}")
+            self.feasibility = False
+            return
+
+        print("Saving solution...")
+        save_solution_json(self.u_dict, self.v_dict, self.w_dict, self.output_file, self.json_params())
+        self.feasibility = True
+
+        # return Experiment(self, self.output_file)
 
 
+
+    def set_starting_solution(self, solution_path):
+
+        print("Setting starting solution...")
+
+        data = read_json_solution(solution_path)
+
+        for mb_pair, var in self.u_dict.items():
+            var.variable.Start = 1 if mb_pair in data["u_dict"] else 0
+            
+        for md_pair, var in self.v_dict.items():
+            var.variable.Start = 1 if md_pair in data["v_dict"] else 0
+
+        for mp_pair, var in self.w_dict.items():
+            var.variable.Start = 1 if mp_pair in data["w_dict"] else 0
 
 
     def compile_variables(self):
+
+        print("Compiling variables...")
+
+        for obj in self.objectives:
+            if obj.upper_bound != None:
+                obj.slack = self.model.addVar(lb=0, vtype=GRB.INTEGER, name=f"slack_{obj.name}")
 
         for m in self.materias:
             for b_id in self.bloques_horario:
@@ -98,87 +224,123 @@ class Instance:
                 new_z = z(p, d)
                 new_z.variable = self.model.addVar(vtype=GRB.BINARY, name=str(new_z))
                 self.z_dict[(p.id, d.id)] = new_z
-        
-        print("Variables:", len(self.u_dict) + len(self.v_dict) + len(self.w_dict) + len(self.x_dict) + len(self.y_dict) + len(self.z_dict))
-
+    
 
     def compile_constraints(self):
+
+        print("Compiling constraints...")
         
         # ### Seleccionar restricciones
         
-        self.constr_carga_horaria()
-        self.constr_dias_materia()
-        self.constr_max_min_horas()
-        self.constr_turnos_materia()
-        self.constr_horas_consecutivas()
-        self.constr_dias_consecutivos()
+        # 1) restricciones basicas para cada materia
+        self.constr_carga_horaria()         # asegurar carga horaria semanal (ej: 5 horas por semana)
+        self.constr_dias_materia()          # cantidad de dias por semana (ej: 2 dias por semana)
+        self.constr_max_min_horas()         # maximo y minimo de horas por dia (ej: 5 horas total en 2 dias -> maximo 3 y minimo 2 por dia)
+        self.constr_turnos_materia()        # fijar materia a turno de horarios (ej: solo horarios de la mañana)
+        self.constr_horas_consecutivas()    # horas consecutivas dentro de un dia (ej: clase teórica de 3 horas seguidas)
+        self.constr_dias_consecutivos()     # evitar dias consecutivos para una misma materia (ej: no lunes y martes)
         
-        self.constr_limitar_profesores_materia()
-        self.constr_cantidad_profesores()
-        self.constr_no_disponible_profesor()
-        self.constr_grupos_max_profesor()
+        # 2) restricciones basicas para cada profesor
+        self.constr_limitar_profesores_materia()  # limitar asignacion de profesores a lista que pueden dictar cada materia
+        self.constr_cantidad_profesores()         # cantidad de profesores que dictan una misma materia en conjunto
+        self.constr_no_disponible_profesor()      # evitar bloques horarios donde un profesor no esta disponible
+        self.constr_grupos_max_profesor()         # limitar cantidad de grupos de una misma materia que tienen al mismo profesor
 
-        self.constr_definir_y()
-        self.constr_definir_z()
-        self.constr_definir_x()
+        # 3) definicion de variables auxiliares
+        self.constr_definir_y()     # definicion de variable "y" (asignacion horario-profesor)
+        self.constr_definir_z()     # definicion de variable "z" (asignacion dia-profesor)
+        self.constr_definir_x()     # definicion de variable "x" (asignacion grupo-horario)
 
+        # 4) restricciones sobre interaccion entre horarios
+        self.constr_superposicion()           # evitar superposicion entre materias (no electivas) de un mismo grupo
+        self.constr_unica_materia_profesor()  # evitar superposicion de materias dictadas por un mismo profesor
 
-        self.constr_superposicion()        
-        self.constr_unica_materia_profesor()
-
-        self.constr_cantidad_salones()
-        self.constr_teo_prac()
-        self.constr_horas_puente_grupos()
+        # 5) restricciones particulares (casi soft-constraints)
+        self.constr_cantidad_salones()      # limitar materias simultaneas a la cantidad de salones disponibles
+        self.constr_teo_prac()              # al menos una hora de teorico debe preceder al practico correspondiente
+        self.constr_horas_puente_grupos()   # evitar horas puente por grupo
 
 
         # self.constr_horarios_excepcionales(7, 1)   # (opcional) limitar cantidad de horas excepcionales
 
-        print("Restricciones:", self.model.NumConstrs)
+        for obj in self.objectives:
+            if obj.upper_bound is not None:
+                self.model.addConstr(obj.expr + obj.slack == obj.upper_bound, name=f"ub_{obj.name}")
 
 
     def compile_objectives(self):
-        
-        self.objectives = { # name : (expr, weight)
-            
-            "prioridades" : (self.obj_prioridades(), 0), # weight = 1
-            "min_max_dias" : (self.obj_min_max_dias(), 1), # weight = 5
-            "superposicion_electivas" : (self.obj_superposicion_electivas(), 0), # weight = 10
-            "horarios_excepcionales (practico)" : (self.obj_horarios_excepcionales(prac=True), 0), # weight = 50
-            "horarios_excepcionales" : (self.obj_horarios_excepcionales(prac=False), 0), # weight = 100
-        }
+
+        print("Compiling objectives...")
 
         OBJ = gp.QuadExpr()
-        for name in self.objectives:
-            expr, weight = self.objectives[name]
-            OBJ += weight * expr
 
+        if self.params.method == "augmecon":
+
+            # sort objectives by priority:
+            self.objectives.sort(key=lambda o: o.priority if o.priority is not None else float('inf'))
+
+            OBJ += self.objectives[0].expr  # first objective without slack
+
+            eps = -self.params.epsilon # for maximization of slack when sense is minimization
+            for obj in self.objectives[1:]:  # from second objective onwards
+                if obj.priority != None:
+                    OBJ += eps * obj.slack/obj.rng
+                    eps /= 10
+        else:
+            for obj in self.objectives:
+                if obj.weight > 0:
+                    OBJ += obj.weight * obj.expr
+        
         self.model.setObjective(OBJ, GRB.MINIMIZE)
 
-        print("Objectives:", sum([len(str(self.objectives[name][0]).split('+')) for name in self.objectives]))
             
 
     def optimize(self):
 
-        self.model.setParam("TimeLimit", 40*60)
-        self.model.Params.MIPGap = 0.01/100
+        self.model.setParam("TimeLimit", self.params.time_limit)
+        self.model.Params.MIPGap = self.params.mip_gap
 
+        # print(self.json_params())
+
+        self.model.update()
         self.model.optimize()
 
-        if not self.model.Status == GRB.INFEASIBLE:
-            print('Obj: %g' % self.model.ObjVal)
-            for name in self.objectives:
-                expr, weight = self.objectives[name]
-                print(f"\t{name}: \t{" "*(35-len(name))}{round(expr.getValue())} \t(peso={weight})")
+        # print(f"Final status: {self.model.Status}")
 
-            save_solution_json(self.u_dict, self.v_dict, self.w_dict, "../results/solution.json")   
+        if self.model.Status in [GRB.INFEASIBLE, GRB.INF_OR_UNBD, GRB.UNBOUNDED]:
+            raise gp.GurobiError("Model is infeasible or unbounded")
 
+        # for i in range(self.model.SolCount):
+        #     self.model.params.SolutionNumber = i
+        #     save_solution_json(self.u_dict, self.v_dict, self.w_dict, f"results/{self.name}/{self.params.method}/sol_{i}.json", self.json_params())
+        
+        for obj in self.objectives:
+            print(obj)
+
+    @property
+    def output_file(self):
+
+        if self.params.method == "augmecon":
+            f1 = self.objectives[0]
+            bounds = "_".join([f"{int(obj.upper_bound)}" for obj in self.objectives[1:]])
+            return f"results/{self.name}/augmecon/sol_{f1.name}_{bounds}.json"
+        else:
+            return f"results/{self.name}/{self.params.method}/sol.json"
+
+    
 
     # #### (3.1.1) superposicion (redundante con la definicion de la variable x)
     def constr_superposicion(self):
 
-        self.model.addConstrs(gp.quicksum(self.u_dict[m1, b].variable * self.superposicion[(m1, m2)].value * self.u_dict[m2, b].variable
-                                for m1 in self.materias_ids for m2 in self.materias_ids)
-                    == 0 for b in self.bloques_horario_ids)
+        # self.model.addConstrs(gp.quicksum(self.u_dict[m1, b].variable * self.superposicion[(m1, m2)].value * self.u_dict[m2, b].variable
+        #                         for m1 in self.materias_ids for m2 in self.materias_ids)
+        #             == 0 for b in self.bloques_horario_ids)
+
+        for b in self.bloques_horario_ids:
+            for m1 in self.materias_ids:
+                for m2 in self.materias_ids:
+                    if m1 != m2 and self.superposicion[(m1, m2)].value == 1:
+                        self.model.addConstr(self.u_dict[m1, b].variable + self.u_dict[m2, b].variable <= 1)
         
     # #### (3.1.2) cubrir carga horaria para cada materia
     def constr_carga_horaria(self):
@@ -233,13 +395,13 @@ class Instance:
 
         p_grupos_simultaneos = [p.nombre for p in self.profesores if p.cursos_simultaneos]
 
-        for p in [p for p in self.profesores if p.nombre not in p_grupos_simultaneos]:
-            self.model.addConstrs(gp.quicksum(self.u_dict[m, b].variable * self.w_dict[m, p.id].variable for m in self.materias_ids)
+        for p in self.profesores:
+            mats_p = [m.id for m in materias_profesor(p, self.materias)]
+            if p.nombre not in p_grupos_simultaneos:
+                self.model.addConstrs(gp.quicksum(self.u_dict[m, b].variable * self.w_dict[m, p.id].variable for m in mats_p)
                         <= 1 for b in self.bloques_horario_ids)
-            
-        # caso particular
-        for p in [p for p in self.profesores if p.nombre in p_grupos_simultaneos]:
-            self.model.addConstrs(gp.quicksum(self.u_dict[m, b].variable * self.w_dict[m, p.id].variable for m in self.materias_ids)
+            else: # caso particular
+                self.model.addConstrs(gp.quicksum(self.u_dict[m, b].variable * self.w_dict[m, p.id].variable for m in mats_p)
                         <= 2 for b in self.bloques_horario_ids)
 
     # ##### (3.2.3.1) limitar profesores a lista
@@ -327,19 +489,22 @@ class Instance:
     # #### (3.3.4) Limitar horas excepcionales
     def constr_horarios_excepcionales(self, E_teo, E_prac):
 
-        suma_horas_prac = gp.LinExpr()
-        suma_horas_teo = gp.LinExpr()
+        # suma_horas_prac = gp.LinExpr()
+        # suma_horas_teo = gp.LinExpr()
         
-        for m in self.materias:
-            for b in self.bloques_horario.values():
-                if b.horario.es_excepcional(m):
-                    if m.teo_prac == "prac":
-                        suma_horas_prac += self.u_dict[m.id, b.id].variable
-                    else:
-                        suma_horas_teo += self.u_dict[m.id, b.id].variable
+        # for m in self.materias:
+        #     for b in self.bloques_horario.values():
+        #         if b.horario.es_excepcional(m):
+        #             if m.teo_prac == "prac":
+        #                 suma_horas_prac += self.u_dict[m.id, b.id].variable
+        #             else:
+        #                 suma_horas_teo += self.u_dict[m.id, b.id].variable
         
-        self.model.addConstr(suma_horas_prac <= E_prac, "horas_excepcionales_prac")
-        self.model.addConstr(suma_horas_teo <= E_teo, "horas_excepcionales_teo")
+        # self.model.addConstr(suma_horas_prac <= E_prac, "horas_excepcionales_prac")
+        # self.model.addConstr(suma_horas_teo <= E_teo, "horas_excepcionales_teo")
+
+        self.model.addConstr(self.obj_horarios_excepcionales(prac=True) <= E_prac, "horas_excepcionales_prac_obj")
+        self.model.addConstr(self.obj_horarios_excepcionales(prac=False) <= E_teo, "horas_excepcionales_teo_obj")
         
     # #### (3.4.1) definicion de variable "x"
     def constr_definir_x(self):
@@ -373,7 +538,7 @@ class Instance:
                     OBJ1 += A * self.w_dict[m.id, p.id].variable * self.u_dict[m.id, b.id].variable
                     count += 1
 
-        print("obj_prioridades terms:", count)
+        # print("obj_prioridades terms:", count)
 
         return OBJ1
 
@@ -398,7 +563,7 @@ class Instance:
                 case None:
                     pass
 
-        print("obj_min_max_dias terms:", count)
+        # print("obj_min_max_dias terms:", count)
 
         return OBJ2
 
@@ -412,7 +577,7 @@ class Instance:
                 OBJ3 += - gp.quicksum(self.x_dict[(g.id,(d,h))].variable * self.x_dict[(g.id,(d,h+1))].variable for h in self.horarios_ids[0:-1])
                 count += 1
 
-        print("obj_horas_puente_grupos terms:", count)
+        # print("obj_horas_puente_grupos terms:", count)
 
         return OBJ3
 
@@ -427,7 +592,7 @@ class Instance:
                     OBJ4 += self.u_dict[m1.id, b].variable * self.superposicion_electivas[m1.id, m2.id].value * self.u_dict[m2.id, b].variable
                     count += 1
 
-        print("obj_superposicion_electivas terms:", count)
+        # print("obj_superposicion_electivas terms:", count)
 
         return OBJ4
 
@@ -447,11 +612,68 @@ class Instance:
                     objetivo += self.u_dict[m.id, b.id].variable
                     count += 1
             
-        print("obj_horarios_excepcionales terms:", count)
+        # print("obj_horarios_excepcionales terms:", count)
 
         return objetivo
+    
+    def obj_horarios_excepcionales_gral(self):
+        return self.obj_horarios_excepcionales(prac=True) + 2*self.obj_horarios_excepcionales(prac=False)
+
+
+
+
+class Experiment:
+
+    def __init__(self, instance: Instance, solution_file):
+        
+        with open(solution_file, 'r', encoding='utf-8') as f:
+            self.solution = json.load(f)
+        self.assignments = read_json_solution(solution_file)
+        self.instance = instance
+        
+    @property
+    def exec_time(self):
+        return self.solution["info"]["exec_time"]
+    
+    @property
+    def objectives(self):
+        return self.solution["info"]["objectives"]
+
+    @property
+    def method(self):
+        return self.solution["info"]["method"]
+
+
+    
+
 
 
 if __name__ == "__main__":
-    instance = Instance("instances/instance_2025sem2.json")
-    instance.solve()
+ 
+
+    #> python exact_solver/runner.py --instance instance_2026sem1 --method weighted_sum --weights 100 20 5 1 
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--instance", type=str, required=True)
+
+    parser.add_argument("--method", type=str, required=True)
+    
+    parser.add_argument("--time_limit", type=int, default=2*60*60)
+    parser.add_argument("--mip_gap", type=float, default=0.0001)
+    parser.add_argument("--epsilon", type=float, default=0.001, help="Epsilon value for Augmecon method")
+    
+    parser.add_argument("--priorities", nargs='+', type=none_or_float, default=[0,1,2,3], help="Priorities for the objectives, e.g., --priorities 1 2 0 0")
+    parser.add_argument("--weights", nargs='+', type=float, help="Weights for the objectives, e.g., --weights 0 1 2 0")
+    parser.add_argument("--ranges", nargs='+', type=none_or_float, help="Ranges for the objectives, e.g., --ranges 10 5 3 8")
+    parser.add_argument("--upper_bounds", nargs='+', type=none_or_float, default=[None]*4, help="Upper bounds for the objectives, e.g., --upper_bounds 50 20 15 30")
+
+    parser.add_argument("--starting_solution", type=str, default=None, help="Path to a starting solution JSON file")
+
+    args = parser.parse_args()
+
+    # print(args.weights)
+
+    instance_name = args.instance
+    instance = Instance(instance_name)
+
+    instance.solve(args)
