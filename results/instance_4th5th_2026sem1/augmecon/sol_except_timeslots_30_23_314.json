@@ -1,0 +1,1203 @@
+{
+    "info": {
+        "instance": "instance_4th5th_2026sem1",
+        "method": "augmecon",
+        "exec_time": 22.471999883651733,
+        "objectives": [
+            {
+                "name": "except_timeslots",
+                "weight": 0,
+                "priority": 0.0,
+                "upper_bound": null,
+                "rng": 16.0,
+                "value": 12.0
+            },
+            {
+                "name": "elective_overlap",
+                "weight": 0,
+                "priority": 1.0,
+                "upper_bound": 30.0,
+                "rng": 18.0,
+                "value": 30.0
+            },
+            {
+                "name": "prof_days",
+                "weight": 0,
+                "priority": 2.0,
+                "upper_bound": 23.0,
+                "rng": 1.0,
+                "value": 23.0
+            },
+            {
+                "name": "preference",
+                "weight": 0,
+                "priority": 3.0,
+                "upper_bound": 314.0,
+                "rng": 19.0,
+                "value": 313.0
+            }
+        ]
+    },
+    "course_assignments": [
+        {
+            "course_id": 128,
+            "professor_ids": [
+                30
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 129,
+            "professor_ids": [
+                68
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 130,
+            "professor_ids": [
+                80
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 131,
+            "professor_ids": [
+                32
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 132,
+            "professor_ids": [
+                66
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 133,
+            "professor_ids": [
+                134,
+                37
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10,
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 134,
+            "professor_ids": [
+                152
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 135,
+            "professor_ids": [
+                140
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 136,
+            "professor_ids": [
+                9
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 137,
+            "professor_ids": [
+                137
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 138,
+            "professor_ids": [
+                123
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        15
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        14,
+                        15
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 139,
+            "professor_ids": [
+                88
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        13,
+                        14,
+                        15
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 140,
+            "professor_ids": [
+                13,
+                164
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        14,
+                        15
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        14,
+                        15
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 141,
+            "professor_ids": [
+                13,
+                164
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 142,
+            "professor_ids": [
+                55
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        8,
+                        9
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 143,
+            "professor_ids": [
+                55
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 144,
+            "professor_ids": [
+                34
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 145,
+            "professor_ids": [
+                34
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 146,
+            "professor_ids": [
+                30
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 147,
+            "professor_ids": [
+                49
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 148,
+            "professor_ids": [
+                7
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 149,
+            "professor_ids": [
+                94
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10,
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 150,
+            "professor_ids": [
+                168
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 151,
+            "professor_ids": [
+                39,
+                76
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 152,
+            "professor_ids": [
+                76,
+                126
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 153,
+            "professor_ids": [
+                135
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 154,
+            "professor_ids": [
+                160
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 155,
+            "professor_ids": [
+                156
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 156,
+            "professor_ids": [
+                58
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 157,
+            "professor_ids": [
+                42
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 158,
+            "professor_ids": [
+                60
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        14,
+                        15
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 159,
+            "professor_ids": [
+                3
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 160,
+            "professor_ids": [
+                16
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 161,
+            "professor_ids": [
+                102
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        8,
+                        9
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 162,
+            "professor_ids": [
+                82
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 163,
+            "professor_ids": [
+                136
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 164,
+            "professor_ids": [
+                138
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 165,
+            "professor_ids": [
+                146,
+                29,
+                57
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10,
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 110,
+            "professor_ids": [
+                5
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        8,
+                        9
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        9
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 111,
+            "professor_ids": [
+                149
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        9
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 112,
+            "professor_ids": [
+                5
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 113,
+            "professor_ids": [
+                162
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 114,
+            "professor_ids": [
+                162
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 115,
+            "professor_ids": [
+                162
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 116,
+            "professor_ids": [
+                129,
+                47
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 117,
+            "professor_ids": [
+                129,
+                47
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 118,
+            "professor_ids": [
+                129
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 119,
+            "professor_ids": [
+                100
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 120,
+            "professor_ids": [
+                100,
+                122
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 121,
+            "professor_ids": [
+                6
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 122,
+            "professor_ids": [
+                119
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 123,
+            "professor_ids": [
+                99
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 124,
+            "professor_ids": [
+                106
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        9,
+                        10
+                    ]
+                },
+                {
+                    "day_id": 4,
+                    "time_ids": [
+                        9,
+                        10,
+                        11
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 125,
+            "professor_ids": [
+                147,
+                53,
+                92
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                },
+                {
+                    "day_id": 3,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 126,
+            "professor_ids": [
+                48
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 1,
+                    "time_ids": [
+                        13,
+                        14
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 127,
+            "professor_ids": [
+                39
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        11,
+                        12,
+                        13,
+                        14
+                    ]
+                }
+            ]
+        }
+    ]
+}
