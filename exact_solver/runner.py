@@ -50,11 +50,12 @@ class Objective:
                 self.value = self.expr.getValue()
             except:
                 return None
+            
         return self.value
     
 
     def __str__(self):
-        return f"\t{self.name}: \t{" "*(35-len(self.name))}{round(self.evaluate())} \t(w={self.weight}, pr={self.priority}, UB={self.upper_bound})"
+        return f"\t{self.name}: \t{" "*(35-len(self.name))}{self.evaluate()} \t(w={self.weight}, pr={self.priority}, UB={self.upper_bound})"
 
     
 
@@ -88,6 +89,7 @@ class Instance:
 
         self.model : gp.Model = None
         self.feasibility = None
+        self.exec_time = None
 
         self.u_dict : dict[tuple, u] = {}
         self.v_dict : dict[tuple, v] = {}
@@ -105,10 +107,14 @@ class Instance:
 
 
     def json_params(self):
+
+        if self.model:
+            self.exec_time = self.model.Runtime
+
         return {
             "instance": self.name,
             "method": self.params.method,
-            "exec_time": self.model.Runtime if self.model else None,
+            "exec_time": self.exec_time,
             "objectives": [
                 {
                     "name": obj.name,
@@ -140,28 +146,89 @@ class Instance:
 
                 for obj in self.objectives:
                     obj.set_params(priority=self.params.priorities[obj.id], rng=self.params.ranges[obj.id], upper_bound=self.params.upper_bounds[obj.id])
+            
+            case "lexicographic":
+
+                for obj in self.objectives:
+                    obj.set_params(priority=self.params.priorities[obj.id])
+                
+                self.lexicographic_solve()
 
 
-        self.compile_variables()
-        self.compile_constraints()
-        self.compile_objectives()
+        if self.params.method != "lexicographic":
 
-        if self.params.starting_solution is not None:
-            self.set_starting_solution(self.params.starting_solution)
-
-        try:
-            self.optimize()
-        except gp.GurobiError as e:
-            print(f"Gurobi Error during optimization: {e}")
-            self.feasibility = False
-            return
-
-        print("Saving solution...")
-        save_solution_json(self.u_dict, self.v_dict, self.w_dict, self.output_file, self.json_params())
+            self.compile_variables()
+            self.compile_constraints()
+            self.compile_objectives()
+            
+            try:
+                self.optimize()
+            except gp.GurobiError as e:
+                print(f"Gurobi Error during optimization: {e}")
+                self.feasibility = False
+                return
+        
         self.feasibility = True
 
+        if self.params.output_file is None or self.params.output_file.lower() != "none":
+            print("Saving solution...")
+            save_solution_json(self.u_dict, self.v_dict, self.w_dict, self.output_file, self.json_params())
+            
         # return Experiment(self, self.output_file)
 
+
+    def lexicographic_solve(self):
+
+        
+        lex_objectives = [o for o in self.objectives if o.priority is not None]
+        lex_objectives.sort(key=lambda o: o.priority)
+
+        upper_bounds = [None]*4
+        exec_time = 0
+
+        aux_instance = None
+
+        i=0
+
+        for obj in lex_objectives:
+            i+=1
+
+            print(f"\n{i}. Optimizing objective {obj.name} with upper bounds {upper_bounds}...\n")
+
+            weights = [0]*4
+            weights[obj.id] = 1
+            
+            ns = argparse.Namespace(instance = self.name, 
+                                method = "weighted_sum",
+                                time_limit = self.params.time_limit - exec_time,
+                                mip_gap = self.params.mip_gap,
+                                output_file = "None",
+                                weights = weights,
+                                upper_bounds = upper_bounds
+                                )
+            
+            aux_instance = Instance(self.name)
+            aux_instance.solve(ns)
+            
+            obj_value = aux_instance.objectives[obj.id].evaluate()
+
+            exec_time += aux_instance.model.Runtime
+            
+            obj.upper_bound = aux_instance.objectives[obj.id].upper_bound
+            obj.value = obj_value
+
+            upper_bounds[obj.id] = obj_value
+
+
+        self.exec_time = exec_time
+
+        self.u_dict = aux_instance.u_dict
+        self.v_dict = aux_instance.v_dict
+        self.w_dict = aux_instance.w_dict
+
+        for obj in self.objectives:
+            if obj.priority is None:
+                obj.value = aux_instance.objectives[obj.id].evaluate()
 
 
     def set_starting_solution(self, solution_path):
@@ -281,7 +348,7 @@ class Instance:
 
             OBJ += self.objectives[0].expr  # first objective without slack
 
-            eps = -self.params.epsilon # for maximization of slack when sense is minimization
+            eps = -self.params.epsilon if hasattr(self.params, "epsilon") else -0.01  # for maximization of slack when sense is minimization
             for obj in self.objectives[1:]:  # from second objective onwards
                 if obj.priority != None:
                     OBJ += eps * obj.slack/obj.rng
@@ -297,8 +364,14 @@ class Instance:
 
     def optimize(self):
 
-        self.model.setParam("TimeLimit", self.params.time_limit)
-        self.model.Params.MIPGap = self.params.mip_gap
+        if hasattr(self.params, "starting_solution") and self.params.starting_solution is not None:
+            self.set_starting_solution(self.params.starting_solution)
+
+        if hasattr(self.params, "time_limit"):
+            self.model.setParam("TimeLimit", self.params.time_limit)
+
+        if hasattr(self.params, "mip_gap"):
+            self.model.Params.MIPGap = self.params.mip_gap
 
         # print(self.json_params())
 
@@ -320,13 +393,15 @@ class Instance:
     @property
     def output_file(self):
 
+        if hasattr(self.params, "output_file") and self.params.output_file is not None:
+            return self.params.output_file
+
         if self.params.method == "augmecon":
             f1 = self.objectives[0]
             bounds = "_".join([f"{int(obj.upper_bound)}" for obj in self.objectives[1:]])
             return f"results/{self.name}/augmecon/sol_{f1.name}_{bounds}.json"
         else:
             return f"results/{self.name}/{self.params.method}/sol.json"
-
     
 
     # #### (3.1.1) superposicion (redundante con la definicion de la variable x)
@@ -668,10 +743,18 @@ if __name__ == "__main__":
     parser.add_argument("--upper_bounds", nargs='+', type=none_or_float, default=[None]*4, help="Upper bounds for the objectives, e.g., --upper_bounds 50 20 15 30")
 
     parser.add_argument("--starting_solution", type=str, default=None, help="Path to a starting solution JSON file")
+    parser.add_argument("--output_file", type=str, default=None, help="Path to save the solution JSON file")
 
     args = parser.parse_args()
 
-    # print(args.weights)
+
+    # args = argparse.Namespace(instance = "instance_4th5th_2026sem1", 
+    #                             method = "lexicographic",
+    #                             time_limit = 2*60*60,
+    #                             mip_gap = 0.0001,
+    #                             output_file = "None",
+    #                             priorities = [0,1,2,3],
+    #                             )
 
     instance_name = args.instance
     instance = Instance(instance_name)

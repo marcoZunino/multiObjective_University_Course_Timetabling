@@ -32,3 +32,5 @@ exact_solver/solver.ipynb
 target/
 
 informe/
+
+.vscode/
