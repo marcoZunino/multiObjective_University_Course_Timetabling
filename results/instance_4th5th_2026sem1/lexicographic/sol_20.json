@@ -2,23 +2,23 @@
     "info": {
         "instance": "instance_4th5th_2026sem1",
         "method": "lexicographic",
-        "exec_time": 0.0,
+        "exec_time": 27.68500018119812,
         "objectives": [
             {
                 "name": "except_timeslots",
                 "weight": 0,
-                "priority": 2.0,
+                "priority": 3.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 22.0
+                "value": 34.0
             },
             {
                 "name": "elective_overlap",
                 "weight": 0,
-                "priority": 3.0,
+                "priority": 1.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 42.0
+                "value": 12.0
             },
             {
                 "name": "prof_days",
@@ -31,10 +31,10 @@
             {
                 "name": "preference",
                 "weight": 0,
-                "priority": 1.0,
+                "priority": 2.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 297.0
+                "value": 304.0
             }
         ]
     },
@@ -48,8 +48,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        12,
-                        13
+                        13,
+                        14
                     ]
                 },
                 {
@@ -70,8 +70,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        12,
-                        13
+                        11,
+                        12
                     ]
                 },
                 {
@@ -114,8 +114,8 @@
                 {
                     "day_id": 3,
                     "time_ids": [
-                        13,
-                        14
+                        11,
+                        12
                     ]
                 }
             ]
@@ -143,7 +143,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 4,
                     "time_ids": [
                         8,
                         9,
@@ -162,16 +162,16 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        12,
-                        13,
-                        14
+                        11,
+                        12
                     ]
                 },
                 {
                     "day_id": 3,
                     "time_ids": [
-                        14,
-                        15
+                        12,
+                        13,
+                        14
                     ]
                 }
             ]
@@ -183,10 +183,10 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 2,
                     "time_ids": [
-                        12,
-                        13
+                        13,
+                        14
                     ]
                 },
                 {
@@ -230,16 +230,16 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        13,
                         14,
                         15
                     ]
                 },
                 {
-                    "day_id": 3,
+                    "day_id": 5,
                     "time_ids": [
                         13,
-                        14
+                        14,
+                        15
                     ]
                 }
             ]
@@ -251,16 +251,16 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 1,
                     "time_ids": [
-                        13,
-                        14
+                        13
                     ]
                 },
                 {
-                    "day_id": 5,
+                    "day_id": 3,
                     "time_ids": [
-                        13
+                        13,
+                        14
                     ]
                 }
             ]
@@ -529,8 +529,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        10,
+                        11
                     ]
                 },
                 {
@@ -552,8 +552,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        10,
-                        11
+                        9,
+                        10
                     ]
                 },
                 {
@@ -640,15 +640,15 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        10,
-                        11
+                        11,
+                        12
                     ]
                 },
                 {
                     "day_id": 2,
                     "time_ids": [
-                        10,
-                        11
+                        9,
+                        10
                     ]
                 }
             ]
@@ -660,17 +660,17 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 },
                 {
-                    "day_id": 2,
+                    "day_id": 3,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 }
             ]
@@ -706,8 +706,8 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        10,
-                        11
+                        9,
+                        10
                     ]
                 },
                 {
@@ -726,11 +726,11 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 3,
                     "time_ids": [
+                        8,
                         9,
-                        10,
-                        11
+                        10
                     ]
                 }
             ]
@@ -742,17 +742,17 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 },
                 {
-                    "day_id": 3,
+                    "day_id": 4,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 }
             ]
@@ -766,9 +766,9 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        12,
                         13,
-                        14
+                        14,
+                        15
                     ]
                 }
             ]
@@ -837,15 +837,15 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
-                        8,
-                        9
+                        13
                     ]
                 },
                 {
                     "day_id": 5,
                     "time_ids": [
+                        8,
                         9
                     ]
                 }
@@ -879,10 +879,10 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
-                        11,
-                        12
+                        9,
+                        10
                     ]
                 },
                 {
@@ -922,7 +922,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 4,
                     "time_ids": [
                         10,
                         11
@@ -931,8 +931,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        9,
-                        10
+                        10,
+                        11
                     ]
                 }
             ]
@@ -944,10 +944,10 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 4,
+                    "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        11,
+                        12
                     ]
                 },
                 {
@@ -1012,14 +1012,14 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 4,
+                    "day_id": 2,
                     "time_ids": [
                         10,
                         11
                     ]
                 },
                 {
-                    "day_id": 5,
+                    "day_id": 3,
                     "time_ids": [
                         13,
                         14
@@ -1036,8 +1036,8 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        12,
-                        13
+                        14,
+                        15
                     ]
                 },
                 {
@@ -1121,15 +1121,15 @@
                     "day_id": 2,
                     "time_ids": [
                         8,
-                        9
+                        9,
+                        10
                     ]
                 },
                 {
                     "day_id": 4,
                     "time_ids": [
                         8,
-                        9,
-                        10
+                        9
                     ]
                 }
             ]
@@ -1150,11 +1150,11 @@
                     ]
                 },
                 {
-                    "day_id": 4,
+                    "day_id": 3,
                     "time_ids": [
-                        11,
                         12,
-                        13
+                        13,
+                        14
                     ]
                 }
             ]
@@ -1189,7 +1189,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 4,
                     "time_ids": [
                         12,
                         13,

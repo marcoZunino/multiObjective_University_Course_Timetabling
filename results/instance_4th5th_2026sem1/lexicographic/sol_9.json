@@ -2,28 +2,28 @@
     "info": {
         "instance": "instance_4th5th_2026sem1",
         "method": "lexicographic",
-        "exec_time": 0.0,
+        "exec_time": 12.172999858856201,
         "objectives": [
             {
                 "name": "except_timeslots",
                 "weight": 0,
-                "priority": 0.0,
+                "priority": 1.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 8.0
+                "value": 26.0
             },
             {
                 "name": "elective_overlap",
                 "weight": 0,
-                "priority": 3.0,
+                "priority": 2.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 38.0
+                "value": 34.0
             },
             {
                 "name": "prof_days",
                 "weight": 0,
-                "priority": 2.0,
+                "priority": 3.0,
                 "upper_bound": null,
                 "rng": null,
                 "value": 24.0
@@ -31,16 +31,38 @@
             {
                 "name": "preference",
                 "weight": 0,
-                "priority": 1.0,
+                "priority": 0.0,
                 "upper_bound": null,
                 "rng": null,
-                "value": 314.0
+                "value": 294.999999625
             }
         ]
     },
     "course_assignments": [
         {
             "course_id": 128,
+            "professor_ids": [
+                30
+            ],
+            "day_assignments": [
+                {
+                    "day_id": 2,
+                    "time_ids": [
+                        12,
+                        13
+                    ]
+                },
+                {
+                    "day_id": 5,
+                    "time_ids": [
+                        11,
+                        12
+                    ]
+                }
+            ]
+        },
+        {
+            "course_id": 129,
             "professor_ids": [
                 68
             ],
@@ -62,35 +84,13 @@
             ]
         },
         {
-            "course_id": 129,
-            "professor_ids": [
-                30
-            ],
-            "day_assignments": [
-                {
-                    "day_id": 2,
-                    "time_ids": [
-                        10,
-                        11
-                    ]
-                },
-                {
-                    "day_id": 4,
-                    "time_ids": [
-                        11,
-                        12
-                    ]
-                }
-            ]
-        },
-        {
             "course_id": 130,
             "professor_ids": [
                 80
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
                         9,
                         10
@@ -114,8 +114,8 @@
                 {
                     "day_id": 3,
                     "time_ids": [
-                        13,
-                        14
+                        12,
+                        13
                     ]
                 }
             ]
@@ -127,7 +127,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
                         11,
                         12
@@ -143,12 +143,12 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
+                        8,
                         9,
                         10,
-                        11,
-                        12
+                        11
                     ]
                 }
             ]
@@ -160,7 +160,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 1,
                     "time_ids": [
                         12,
                         13,
@@ -168,10 +168,10 @@
                     ]
                 },
                 {
-                    "day_id": 4,
+                    "day_id": 3,
                     "time_ids": [
-                        13,
-                        14
+                        14,
+                        15
                     ]
                 }
             ]
@@ -186,13 +186,13 @@
                     "day_id": 3,
                     "time_ids": [
                         12,
-                        13,
-                        14
+                        13
                     ]
                 },
                 {
                     "day_id": 5,
                     "time_ids": [
+                        12,
                         13,
                         14
                     ]
@@ -228,7 +228,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
                         13,
                         14,
@@ -236,7 +236,7 @@
                     ]
                 },
                 {
-                    "day_id": 3,
+                    "day_id": 5,
                     "time_ids": [
                         14,
                         15
@@ -251,16 +251,16 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
-                        13
+                        14
                     ]
                 },
                 {
-                    "day_id": 5,
+                    "day_id": 3,
                     "time_ids": [
-                        14,
-                        15
+                        13,
+                        14
                     ]
                 }
             ]
@@ -314,8 +314,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        11,
-                        12
+                        12,
+                        13
                     ]
                 },
                 {
@@ -424,8 +424,8 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        13,
-                        14
+                        10,
+                        11
                     ]
                 },
                 {
@@ -488,7 +488,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 5,
+                    "day_id": 1,
                     "time_ids": [
                         10,
                         11,
@@ -527,10 +527,10 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
-                        11,
-                        12
+                        9,
+                        10
                     ]
                 },
                 {
@@ -574,8 +574,8 @@
                 {
                     "day_id": 1,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 },
                 {
@@ -594,14 +594,14 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        10,
+                        11
                     ]
                 },
                 {
-                    "day_id": 5,
+                    "day_id": 4,
                     "time_ids": [
                         10,
                         11
@@ -691,8 +691,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        13,
-                        14
+                        14,
+                        15
                     ]
                 }
             ]
@@ -744,12 +744,12 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 },
                 {
-                    "day_id": 4,
+                    "day_id": 3,
                     "time_ids": [
                         9,
                         10
@@ -805,8 +805,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        12,
-                        13
+                        11,
+                        12
                     ]
                 }
             ]
@@ -839,14 +839,14 @@
                 {
                     "day_id": 3,
                     "time_ids": [
+                        8,
                         9
                     ]
                 },
                 {
                     "day_id": 5,
                     "time_ids": [
-                        9,
-                        10
+                        9
                     ]
                 }
             ]
@@ -879,16 +879,16 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 3,
                     "time_ids": [
-                        9
+                        10,
+                        11
                     ]
                 },
                 {
                     "day_id": 5,
                     "time_ids": [
-                        11,
-                        12
+                        10
                     ]
                 }
             ]
@@ -909,8 +909,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        11,
-                        12
+                        10,
+                        11
                     ]
                 }
             ]
@@ -931,8 +931,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        9,
-                        10
+                        10,
+                        11
                     ]
                 }
             ]
@@ -976,8 +976,8 @@
                 {
                     "day_id": 5,
                     "time_ids": [
-                        11,
-                        12
+                        10,
+                        11
                     ]
                 }
             ]
@@ -1012,17 +1012,17 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 4,
                     "time_ids": [
                         10,
                         11
                     ]
                 },
                 {
-                    "day_id": 4,
+                    "day_id": 5,
                     "time_ids": [
-                        10,
-                        11
+                        13,
+                        14
                     ]
                 }
             ]
@@ -1034,17 +1034,17 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 3,
                     "time_ids": [
-                        13,
-                        14
+                        12,
+                        13
                     ]
                 },
                 {
-                    "day_id": 4,
+                    "day_id": 5,
                     "time_ids": [
-                        13,
-                        14
+                        12,
+                        13
                     ]
                 }
             ]
@@ -1072,7 +1072,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 1,
+                    "day_id": 2,
                     "time_ids": [
                         12,
                         13,
@@ -1088,7 +1088,7 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 3,
+                    "day_id": 1,
                     "time_ids": [
                         12,
                         13
@@ -1120,16 +1120,16 @@
                 {
                     "day_id": 2,
                     "time_ids": [
-                        9,
-                        10
+                        8,
+                        9
                     ]
                 },
                 {
                     "day_id": 4,
                     "time_ids": [
+                        8,
                         9,
-                        10,
-                        11
+                        10
                     ]
                 }
             ]
@@ -1150,11 +1150,11 @@
                     ]
                 },
                 {
-                    "day_id": 3,
+                    "day_id": 4,
                     "time_ids": [
+                        11,
                         12,
-                        13,
-                        14
+                        13
                     ]
                 }
             ]
@@ -1189,12 +1189,12 @@
             ],
             "day_assignments": [
                 {
-                    "day_id": 2,
+                    "day_id": 3,
                     "time_ids": [
-                        11,
                         12,
                         13,
-                        14
+                        14,
+                        15
                     ]
                 }
             ]

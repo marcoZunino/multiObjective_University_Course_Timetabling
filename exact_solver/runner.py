@@ -108,7 +108,7 @@ class Instance:
 
     def json_params(self):
 
-        if self.model:
+        if self.exec_time is None and self.model:
             self.exec_time = self.model.Runtime
 
         return {
@@ -132,7 +132,6 @@ class Instance:
 
         # parametros: input_file, output_file, time_limit, mip_gap
             
-        self.model: gp.Model = gp.Model(self.name)
         self.params = params
 
         match self.params.method:
@@ -156,6 +155,8 @@ class Instance:
 
 
         if self.params.method != "lexicographic":
+
+            self.model: gp.Model = gp.Model(self.name)
 
             self.compile_variables()
             self.compile_constraints()
