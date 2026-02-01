@@ -344,8 +344,8 @@ class Instance:
 
         if self.params.method == "augmecon":
 
-            # sort objectives by priority:
-            self.objectives.sort(key=lambda o: o.priority if o.priority is not None else float('inf'))
+            # sort objectives by priority DESC:
+            self.objectives.sort(key=lambda o: o.priority if o.priority is not None else float('inf'), reverse=True)
 
             OBJ += self.objectives[0].expr  # first objective without slack
 
@@ -718,6 +718,10 @@ class Experiment:
     @property
     def method(self):
         return self.solution["info"]["method"]
+    
+    @property
+    def priorities(self):
+        return [obj["priority"] for obj in self.objectives]
 
 
     
