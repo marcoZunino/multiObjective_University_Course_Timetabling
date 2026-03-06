@@ -201,7 +201,7 @@ class Instance:
             
             ns = argparse.Namespace(instance = self.name, 
                                 method = "weighted_sum",
-                                time_limit = self.params.time_limit - exec_time,
+                                time_limit = max(self.params.time_limit - exec_time, 0),
                                 mip_gap = self.params.mip_gap,
                                 output_file = "None",
                                 weights = weights,
@@ -218,7 +218,7 @@ class Instance:
             obj.upper_bound = aux_instance.objectives[obj.id].upper_bound
             obj.value = obj_value
 
-            upper_bounds[obj.id] = obj_value
+            upper_bounds[obj.id] = round(obj_value)
 
 
         self.exec_time = exec_time

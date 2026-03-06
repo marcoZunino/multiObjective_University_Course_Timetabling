@@ -49,7 +49,7 @@ def display_stats_table(instances):
             "#solicitudes_min_dias": f"{round(len([p for p in inst.profesores if p.min_max_dias == "min"])/len(inst.profesores)*100)}%",
             "#carga_horaria_por_grupo": np.mean([sum([m.carga_horaria for m in inst.materias if g in m.grupos]) for g in inst.grupos]),
             # "#electivas_por_grupo": np.mean([len([m for m in inst.materias if m.electiva and g in m.grupos]) for g in inst.grupos]),
-            "#salones": inst.num_salones,
+            # "#salones": inst.num_salones,
             "%disponibilidad": f"{round(len([pr for p in inst.profesores for pr in p.prioridades if pr.value > 0])/total_horas*100)}%",
             # "%pref=1": f"{round(len([pr for pr in p.prioridades for p in inst.profesores if pr.value == 1])/total_horas*100)}%",
             # "%pref=2": f"{round(len([pr for pr in p.prioridades for p in inst.profesores if pr.value == 2])/total_horas*100)}%",
@@ -63,7 +63,10 @@ def display_stats_table(instances):
     return df
 
 
-def display_objectives_ranges(df, objectives):
+def display_objectives_ranges(experiments, instance, objectives):
+
+    df = display_experiments([e for e in experiments if e.instance == instance])
+
     rows = []
 
     for obj in objectives:
@@ -96,6 +99,7 @@ def display_experiments(experiments):
 
     for exp in experiments:
         rows.append({
+            "instance": exp.instance.name,
             "exec_time (s)" : exp.exec_time,
         })
 
@@ -110,6 +114,19 @@ def display_experiments(experiments):
     df = df.round(2)
 
     return df
+
+def display_payoff_matrix(experiments, instance):
+
+    payoff_exps = [e for e in experiments if e.instance == instance and e.method == "lexicographic"
+                          and e.priorities in [
+                                [0, 1, 2, 3], 
+                                [3, 0, 1, 2], 
+                                [2, 3, 0, 1], 
+                                [1, 2, 3, 0], 
+                              ]]
+    payoff_exps.sort(key=lambda e: e.priorities.index(0))
+    
+    return display_experiments(payoff_exps)[["value except_timeslots", "value elective_overlap", "value prof_days", "value preference"]]
 
 
 def filtrar_no_dominados(points):

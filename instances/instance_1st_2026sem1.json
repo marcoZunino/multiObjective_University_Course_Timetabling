@@ -1,0 +1,4842 @@
+{
+    "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+    ],
+    "shifts": [
+        0,
+        1,
+        2,
+        3
+    ],
+    "times": [
+        {
+            "id": 0,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 1,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 2,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 3,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 4,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 5,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 6,
+            "shifts": [
+                1
+            ],
+            "exceptional_shifts": [
+                1
+            ]
+        },
+        {
+            "id": 7,
+            "shifts": [
+                2
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 8,
+            "shifts": [
+                2,
+                3
+            ],
+            "exceptional_shifts": [
+                3
+            ]
+        },
+        {
+            "id": 9,
+            "shifts": [
+                2,
+                3
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 10,
+            "shifts": [
+                2,
+                3
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 11,
+            "shifts": [
+                3,
+                0,
+                2
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 12,
+            "shifts": [
+                3,
+                0,
+                2
+            ],
+            "exceptional_shifts": [
+                2
+            ]
+        },
+        {
+            "id": 13,
+            "shifts": [
+                0,
+                3
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 14,
+            "shifts": [
+                0,
+                3
+            ],
+            "exceptional_shifts": []
+        },
+        {
+            "id": 15,
+            "shifts": [
+                0,
+                3
+            ],
+            "exceptional_shifts": [
+                3
+            ]
+        }
+    ],
+    "groups": [
+        {
+            "id": 0,
+            "year": 1,
+            "shift": 1
+        },
+        {
+            "id": 1,
+            "year": 1,
+            "shift": 1
+        },
+        {
+            "id": 2,
+            "year": 1,
+            "shift": 1
+        },
+        {
+            "id": 3,
+            "year": 1,
+            "shift": 2
+        },
+        {
+            "id": 4,
+            "year": 1,
+            "shift": 2
+        },
+        {
+            "id": 5,
+            "year": 1,
+            "shift": 2
+        },
+        {
+            "id": 6,
+            "year": 1,
+            "shift": 0
+        }
+    ],
+    "subjects": [
+        {
+            "id": 0,
+            "theo_prac_subject_id": null
+        },
+        {
+            "id": 13,
+            "theo_prac_subject_id": 63
+        },
+        {
+            "id": 15,
+            "theo_prac_subject_id": 83
+        },
+        {
+            "id": 16,
+            "theo_prac_subject_id": 88
+        },
+        {
+            "id": 38,
+            "theo_prac_subject_id": 74
+        },
+        {
+            "id": 51,
+            "theo_prac_subject_id": null
+        },
+        {
+            "id": 54,
+            "theo_prac_subject_id": null
+        },
+        {
+            "id": 56,
+            "theo_prac_subject_id": null
+        },
+        {
+            "id": 57,
+            "theo_prac_subject_id": 85
+        },
+        {
+            "id": 63,
+            "theo_prac_subject_id": 13
+        },
+        {
+            "id": 65,
+            "theo_prac_subject_id": null
+        },
+        {
+            "id": 74,
+            "theo_prac_subject_id": 38
+        },
+        {
+            "id": 81,
+            "theo_prac_subject_id": 89
+        },
+        {
+            "id": 83,
+            "theo_prac_subject_id": 15
+        },
+        {
+            "id": 85,
+            "theo_prac_subject_id": 57
+        },
+        {
+            "id": 88,
+            "theo_prac_subject_id": 16
+        },
+        {
+            "id": 89,
+            "theo_prac_subject_id": 81
+        },
+        {
+            "id": 90,
+            "theo_prac_subject_id": null
+        }
+    ],
+    "courses": [
+        {
+            "id": 1,
+            "subject_id": 88,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                15,
+                59,
+                85
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                5,
+                9,
+                13,
+                17,
+                21,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 2,
+            "subject_id": 88,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                15,
+                59,
+                85
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                6,
+                10,
+                14,
+                18,
+                22,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 3,
+            "subject_id": 88,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                15,
+                59,
+                85
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                7,
+                11,
+                15,
+                19,
+                23,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 4,
+            "subject_id": 88,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                102
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                8,
+                12,
+                16,
+                20,
+                24,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 5,
+            "subject_id": 16,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                142
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                9,
+                13,
+                17,
+                21,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 6,
+            "subject_id": 16,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                142
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                10,
+                14,
+                18,
+                22,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 7,
+            "subject_id": 16,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                142
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                11,
+                15,
+                19,
+                23,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 8,
+            "subject_id": 16,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                142
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                12,
+                16,
+                20,
+                24,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 9,
+            "subject_id": 0,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                4
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                13,
+                17,
+                21,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 10,
+            "subject_id": 0,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                4
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                14,
+                18,
+                22,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 11,
+            "subject_id": 0,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                4
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                15,
+                19,
+                23,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 12,
+            "subject_id": 0,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                4
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                16,
+                20,
+                24,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 13,
+            "subject_id": 56,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                14
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                9,
+                17,
+                21,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 14,
+            "subject_id": 56,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                14
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                10,
+                18,
+                22,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 15,
+            "subject_id": 56,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                14
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                11,
+                19,
+                23,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 16,
+            "subject_id": 56,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                14
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                12,
+                20,
+                24,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 17,
+            "subject_id": 57,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                112,
+                165
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                9,
+                13,
+                21,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 18,
+            "subject_id": 57,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                112,
+                165
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                10,
+                14,
+                22,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 19,
+            "subject_id": 57,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                112,
+                165
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                11,
+                15,
+                23,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 20,
+            "subject_id": 57,
+            "num_hours": 3,
+            "num_days": 1,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                112,
+                165
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                12,
+                16,
+                24,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 21,
+            "subject_id": 85,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                84,
+                112
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                9,
+                13,
+                17,
+                25,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 22,
+            "subject_id": 85,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                84,
+                112
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                10,
+                14,
+                18,
+                26,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 23,
+            "subject_id": 85,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                84,
+                112
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                11,
+                15,
+                19,
+                27,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 24,
+            "subject_id": 85,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                12,
+                84,
+                112
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                12,
+                16,
+                20,
+                28,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 25,
+            "subject_id": 81,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116,
+                151
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                9,
+                13,
+                17,
+                21,
+                29
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 26,
+            "subject_id": 81,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116,
+                151
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                10,
+                14,
+                18,
+                22,
+                30
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 27,
+            "subject_id": 81,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116,
+                151
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                11,
+                15,
+                19,
+                23,
+                31
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 28,
+            "subject_id": 81,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                11
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                12,
+                16,
+                20,
+                24,
+                32
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 29,
+            "subject_id": 89,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116
+            ],
+            "groups": [
+                0
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                1,
+                5,
+                9,
+                13,
+                17,
+                21,
+                25
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 30,
+            "subject_id": 89,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116
+            ],
+            "groups": [
+                1
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                2,
+                6,
+                10,
+                14,
+                18,
+                22,
+                26
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 31,
+            "subject_id": 89,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                36,
+                116
+            ],
+            "groups": [
+                2
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                3,
+                7,
+                11,
+                15,
+                19,
+                23,
+                27
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 32,
+            "subject_id": 89,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                36
+            ],
+            "groups": [
+                3
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                4,
+                8,
+                12,
+                16,
+                20,
+                24,
+                28
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 33,
+            "subject_id": 15,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                15
+            ],
+            "groups": [
+                4
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                35,
+                37,
+                38,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 34,
+            "subject_id": 15,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                59
+            ],
+            "groups": [
+                5
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                36,
+                37,
+                38,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 35,
+            "subject_id": 83,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                15
+            ],
+            "groups": [
+                4
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                33,
+                37,
+                38,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 36,
+            "subject_id": 83,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                59
+            ],
+            "groups": [
+                5
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                34,
+                37,
+                38,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 37,
+            "subject_id": 63,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                91
+            ],
+            "groups": [
+                4,
+                5
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                33,
+                34,
+                35,
+                36,
+                38,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 38,
+            "subject_id": 13,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                50
+            ],
+            "groups": [
+                4,
+                5
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                33,
+                34,
+                35,
+                36,
+                37,
+                39
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 39,
+            "subject_id": 51,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                95
+            ],
+            "groups": [
+                4,
+                5
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                33,
+                34,
+                35,
+                36,
+                37,
+                38
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 40,
+            "subject_id": 74,
+            "num_hours": 5,
+            "num_days": 2,
+            "theo_prac": true,
+            "num_profs": 1,
+            "available_professors": [
+                26
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                41,
+                42,
+                43,
+                44,
+                45
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 41,
+            "subject_id": 38,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": false,
+            "num_profs": 1,
+            "available_professors": [
+                101
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                40,
+                42,
+                43,
+                44,
+                45
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 42,
+            "subject_id": 90,
+            "num_hours": 4,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                36
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                40,
+                41,
+                43,
+                44,
+                45
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 43,
+            "subject_id": 90,
+            "num_hours": 2,
+            "num_days": 1,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                36
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                40,
+                41,
+                42,
+                44,
+                45
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 44,
+            "subject_id": 54,
+            "num_hours": 4,
+            "num_days": 2,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                141
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                40,
+                41,
+                42,
+                43,
+                45
+            ],
+            "elective_no_overlap": []
+        },
+        {
+            "id": 45,
+            "subject_id": 65,
+            "num_hours": 4,
+            "num_days": 2,
+            "theo_prac": null,
+            "num_profs": 1,
+            "available_professors": [
+                137
+            ],
+            "groups": [
+                6
+            ],
+            "elective": false,
+            "consecutive_days": false,
+            "no_overlap": [
+                40,
+                41,
+                42,
+                43,
+                44
+            ],
+            "elective_no_overlap": []
+        }
+    ],
+    "professors": [
+        {
+            "id": 15,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 88,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 15,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 83,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 2
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 88,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 15,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 83,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 85,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 88,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 102,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 88,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 142,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 16,
+                    "num_groups": 4
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 0,
+                    "num_groups": 4
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 56,
+                    "num_groups": 4
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 57,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 85,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 112,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 57,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 85,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 13,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 13,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 13,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 13,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 15,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 165,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 57,
+                    "num_groups": 2
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 84,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 85,
+                    "num_groups": 2
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 13,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 15,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 81,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 89,
+                    "num_groups": 2
+                },
+                {
+                    "subject_id": 90,
+                    "num_groups": 2
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 14,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 116,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 81,
+                    "num_groups": 1
+                },
+                {
+                    "subject_id": 89,
+                    "num_groups": 2
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 11,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 11,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 151,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 81,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 81,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 14,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 14,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 14,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 14,
+                    "preference": 2
+                }
+            ]
+        },
+        {
+            "id": 91,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 63,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 13,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 3
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 95,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 51,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 2,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 3,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 4,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 5,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 6,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 7,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 8,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 9,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 9,
+                    "preference": 2
+                },
+                {
+                    "day": 5,
+                    "time": 9,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 4,
+                    "time": 10,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 11,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 74,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 15,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 15,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 15,
+                    "preference": 1
+                }
+            ]
+        },
+        {
+            "id": 101,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 38,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 2,
+                    "time": 10,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 12,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 141,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 54,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": true,
+            "availability": [
+                {
+                    "day": 3,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 0,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 1,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 2,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 2,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 2,
+                    "time": 3,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 4,
+                    "time": 3,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 11,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 11,
+                    "preference": 2
+                },
+                {
+                    "day": 1,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 12,
+                    "preference": 1
+                },
+                {
+                    "day": 5,
+                    "time": 12,
+                    "preference": 2
+                },
+                {
+                    "day": 3,
+                    "time": 13,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 3,
+                    "time": 15,
+                    "preference": 3
+                }
+            ]
+        },
+        {
+            "id": 137,
+            "num_groups_per_subject": [
+                {
+                    "subject_id": 65,
+                    "num_groups": 1
+                }
+            ],
+            "simult_courses": false,
+            "min_max_days": null,
+            "availability": [
+                {
+                    "day": 1,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 13,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 13,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 14,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 14,
+                    "preference": 1
+                },
+                {
+                    "day": 1,
+                    "time": 15,
+                    "preference": 1
+                },
+                {
+                    "day": 2,
+                    "time": 15,
+                    "preference": 1
+                },
+                {
+                    "day": 3,
+                    "time": 15,
+                    "preference": 1
+                },
+                {
+                    "day": 4,
+                    "time": 15,
+                    "preference": 3
+                },
+                {
+                    "day": 5,
+                    "time": 15,
+                    "preference": 1
+                }
+            ]
+        }
+    ],
+    "num_rooms": 13
+}
