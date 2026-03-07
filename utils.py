@@ -115,6 +115,19 @@ def display_experiments(experiments):
 
     return df
 
+def display_exec_times(experiments):
+
+    df = display_experiments(experiments)
+
+    df_times = df[["instance", "exec_time (s)"]].copy()
+    df_times = df_times.groupby("instance").agg(
+        mean_time=("exec_time (s)", "mean"),
+        max_time=("exec_time (s)", "max"),
+        min_time=("exec_time (s)", "min"),
+    ).reset_index()
+
+    return df_times.round(2)
+
 def display_payoff_matrix(experiments, instance):
 
     payoff_exps = [e for e in experiments if e.instance == instance and e.method == "lexicographic"
@@ -210,3 +223,84 @@ def plot3d(df, steps, objectives, ideal, nadir):
 
     # Título
     ax.set_title("3D Scatter Plot of Filtered Values")
+
+
+
+def normalize_minmax(points: np.ndarray) -> np.ndarray:
+    """
+    Normaliza los puntos objetivo al rango [0,1] por dimensión.
+    """
+    min_vals = np.min(points, axis=0)
+    max_vals = np.max(points, axis=0)
+    return (points - min_vals) / (max_vals - min_vals)
+
+
+def pareto_spacing(points: np.ndarray) -> float:
+    """
+    Calcula el spacing de un frente de Pareto.
+    
+    Parámetros:
+        points (np.ndarray): matriz de forma (n_puntos, n_dimensiones)
+    
+    Retorna:
+        float: valor del spacing
+    """
+
+    points = normalize_minmax(points)
+
+    n = points.shape[0]
+    # Calcular todas las distancias entre pares de puntos
+    dist_matrix = np.linalg.norm(points[:, None, :] - points[None, :, :], axis=2)
+    
+    # Ignorar la diagonal (distancia a sí mismo = 0)
+    np.fill_diagonal(dist_matrix, np.inf)
+    
+    # Distancia mínima de cada punto a otro
+    d_min = np.min(dist_matrix, axis=1)
+    
+    # Promedio de esas distancias mínimas
+    d_mean = np.mean(d_min)
+    
+    # Spacing
+    spacing = np.sum(np.abs(d_min - d_mean)) / n
+    return spacing
+
+
+
+def pareto_spread(points: np.ndarray, extreme_points: np.ndarray) -> float:
+    """
+    Calcula el spread de un frente de Pareto.
+    
+    Parámetros:
+        points (np.ndarray): matriz de forma (n_puntos, n_dimensiones)
+    
+    Retorna:
+        float: valor del spread
+    """
+    points = normalize_minmax(points)
+    extreme_points = normalize_minmax(extreme_points)
+
+    interior_points = np.array([p for p in points if not any(np.array_equal(p, q) for q in extreme_points)])  # Filtrar los puntos extremos del frente
+
+    n = interior_points.shape[0]
+    # Calcular todas las distancias entre pares de puntos
+    dist_matrix = np.linalg.norm(interior_points[:, None, :] - interior_points[None, :, :], axis=2)
+    
+    # Ignorar la diagonal (distancia a sí mismo = 0)
+    np.fill_diagonal(dist_matrix, np.inf)
+    
+    # Distancia mínima de cada punto a otro
+    d_min = np.min(dist_matrix, axis=1)
+    
+    # Promedio de esas distancias mínimas
+    d_mean = np.mean(d_min)
+
+    d_extremos = 0
+    for ext in extreme_points:
+        # minima distancia entre un extremo y cualquier punto interior
+        d_extremos += min(np.linalg.norm(interior_points - ext, axis=1))
+    
+    # Spread = (suma de distancias consecutivas) / distancia entre extremos
+    spread = (d_extremos + np.sum(np.abs(d_min - d_mean))) / (d_extremos + n*d_mean)
+    
+    return spread
